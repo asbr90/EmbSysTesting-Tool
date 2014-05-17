@@ -1,9 +1,18 @@
-#include "DriverUsage.h"
+/**
+ * @author	Artjom Siebert
+ * @date	14.05.2014
+ * 
+ */ 
 
-/*
-bool DUI_Initialization(S_driver){}
+#include "Driver_I2C.h"
 
-bool SendData(){}
-			
-R_data ReceiveData(){}
-*/
+Driver_I2C::Driver_I2C(){}
+
+Driver_I2C::Driver_I2C(S_driver){}
+
+bool Driver_I2C::DUI_Initialization(S_driver){}
+
+bool Driver_I2C::SendData() {}
+	 
+R_data Driver_I2C::ReceiveData(){} 
+	
