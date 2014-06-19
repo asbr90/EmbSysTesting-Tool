@@ -1,4 +1,5 @@
 #include "EmbSysVisu.h"
+#include "connectionuart.h"
 #include <QApplication>
 
 int main( int argc, char* argv[])

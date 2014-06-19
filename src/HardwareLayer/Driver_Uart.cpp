@@ -14,7 +14,6 @@
 
 using namespace std; 
 
-
 Driver_Uart::Driver_Uart(){
 }
 
@@ -41,7 +40,6 @@ bool Driver_Uart::SendData(char *s) {
  cout << "Send data char '" << *s  <<"'" << endl;
  if(fd != -1){
 	serialPuts(fd, s);
-	
  }
 return true;
 }
