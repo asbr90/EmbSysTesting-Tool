@@ -29,12 +29,14 @@
 #ifndef __DRIVER_I2C_
 #define __DRIVER_I2C_
 #include "DriverUsage.h"
+
+#include "../Middleware/header/Middleware_Structs.h"
 class Driver_I2C: public DriverUsageInterface{
 public:
 	Driver_I2C(); 
 	Driver_I2C(S_driver); 
 	bool DUI_Initialization(S_driver) ;
-	bool SendData(char *s);
+	bool SendData();
 	R_data ReceiveData(); 
 	
 };

@@ -10,6 +10,7 @@
 
 #ifndef __DRIVER_USAGE_
 #define __DRIVER_USAGE_
+
 #include "../Middleware/header/Middleware_Structs.h"
 
 class DriverUsageInterface{
@@ -25,7 +26,7 @@ class DriverUsageInterface{
 	 * @brief
 	 * @return
 	 */
-	 virtual bool SendData(char *s) = 0;
+	 virtual bool SendData() = 0;
 	 
 	/**
 	 * @brief

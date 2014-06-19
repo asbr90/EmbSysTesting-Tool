@@ -1,9 +1,9 @@
 /*
  * @author	Artjom Siebert
- * @date	14.05.2014
+ * @date	17.05.2014
  * @brief
  * 
- * Driver_I2C.h:
+ * Driver_SPI.h:
  *
  * Copyright (c) 2012-2013 Gordon Henderson. <projects@drogon.net>
  ***********************************************************************
@@ -26,17 +26,21 @@
  ***********************************************************************
  */
  
-#ifndef __DRIVER_I2C_
-#define __DRIVER_I2C_
+#ifndef __DRIVER_SPI_
+#define __DRIVER_SPI_
 #include "DriverUsage.h"
-class Driver_I2C: public DriverUsageInterface{
-public:
-	Driver_I2C(); 
-	Driver_I2C(S_driver); 
-	bool DUI_Initialization(S_driver) ;
-	bool SendData(char *s);
-	R_data ReceiveData(); 
-	
-};
+#include "wiringPiSPI.h"
+#define SPI_SETUP_ERROR	-1
 
-#endif /*__DRIVER_I2C_*/
+class Driver_SPI: public DriverUsageInterface{
+public:
+	Driver_SPI(int channel, int speed); 
+	Driver_SPI(S_driver); 
+	bool DUI_Initialization(S_driver) ;
+	bool SendData(char*);
+	R_data ReceiveData(); 
+private:
+	int channel;
+	int speed;
+};
+#endif /*__DRIVER_SPI_*/

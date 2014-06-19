@@ -10,9 +10,8 @@
 * @brief  Settings of driver
 */
 struct S_driver{
-  int pin;	 /*pin number*/
-  int mode;	 /*mode of a pin*/
-  int value; /*value which write to the supplied pin */
+  int pin;	/*pin number*/
+  int mode;	/*mode of a pin*/
 };
 
 /**
