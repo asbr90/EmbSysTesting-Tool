@@ -1,4 +1,5 @@
 #include "connectionuart.h"
+#include "ui_EmbSysVisu.h"
 #include <iostream>
 using namespace std;
 
@@ -18,7 +19,7 @@ ConnectionUART::ConnectionUART(QWidget *parent ) :  QWidget(parent){
     this->storeDirection();
     this->storeParityBit();
 
-  //  this->uartDriver = uartDriver;
+   //  this->uartDriver = uartDriver;
 }
 
 void ConnectionUART::slotClose(){
@@ -36,7 +37,10 @@ void ConnectionUART::storeSettings(){
     cout << "Baudrate   :   "       << baudrate         << endl;
     cout << "Direction  :   "       << dataDirection    << endl;
 
-   this->uartDriver = new Driver_Uart();
+  // this->uartDriver = new Driver_Uart();
+    new Channel();
+
+    close();
 }
 
 void ConnectionUART::storeDataBits(){
@@ -45,6 +49,7 @@ void ConnectionUART::storeDataBits(){
 
 void ConnectionUART::storeParityBit(){
     int parity = parityComboBox->currentIndex();
+    parityBit = true;
 
     if(parity != 0){
         parityEnable = true;

@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'EmbSysVisu.ui'
 **
-** Created: Thu Jun 19 17:41:43 2014
-**      by: Qt User Interface Compiler version 4.8.2
+** Created: Thu Jun 19 23:55:20 2014
+**      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -14,13 +14,17 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
+#include <QtGui/QLabel>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include "qwt_plot.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -37,6 +41,11 @@ public:
     QWidget *centralwidget;
     QTabWidget *tabWidget;
     QWidget *logicAnalyzer;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label;
+    QwtPlot *qwtPlot;
     QWidget *dataAnalyzer;
     QWidget *dbb;
     QMenuBar *menubar;
@@ -78,6 +87,27 @@ public:
         tabWidget->setSizePolicy(sizePolicy);
         logicAnalyzer = new QWidget();
         logicAnalyzer->setObjectName(QString::fromUtf8("logicAnalyzer"));
+        verticalLayoutWidget = new QWidget(logicAnalyzer);
+        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(9, 9, 1181, 691));
+        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        label = new QLabel(verticalLayoutWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        horizontalLayout->addWidget(label);
+
+        qwtPlot = new QwtPlot(verticalLayoutWidget);
+        qwtPlot->setObjectName(QString::fromUtf8("qwtPlot"));
+
+        horizontalLayout->addWidget(qwtPlot);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
         tabWidget->addTab(logicAnalyzer, QString());
         dataAnalyzer = new QWidget();
         dataAnalyzer->setObjectName(QString::fromUtf8("dataAnalyzer"));
@@ -133,6 +163,7 @@ public:
         actionI2C->setText(QApplication::translate("MainWindow", "I2C", 0, QApplication::UnicodeUTF8));
         actionUART->setText(QApplication::translate("MainWindow", "UART", 0, QApplication::UnicodeUTF8));
         actionSPI->setText(QApplication::translate("MainWindow", "SPI", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("MainWindow", "Channel:", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(logicAnalyzer), QApplication::translate("MainWindow", "Logic Analyzer", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(dataAnalyzer), QApplication::translate("MainWindow", "Data Analyzer", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(dbb), QApplication::translate("MainWindow", "BDD - Editor", 0, QApplication::UnicodeUTF8));

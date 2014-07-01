@@ -5,10 +5,8 @@
 #define DIR_RECEIVER    1
 #define DIR_Transceiver 2
 
-#include "../HardwareLayer/DriverUsage.h"
-#include "../HardwareLayer/GPIO_Driver.h"
-
 #include "ui_ConnectionUART.h"
+#include "Channel.h"
 
 class ConnectionUART : public QWidget, public Ui::Form
 {
@@ -17,7 +15,7 @@ public:
     explicit ConnectionUART(QWidget *parent = 0);
 
 public:
-    Driver_Uart *uartDriver;
+   // Driver_Uart *uartDriver;
     unsigned int databits;
     bool parityBit;
     bool parityEnable;

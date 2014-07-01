@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ConnectionUART.ui'
 **
-** Created: Thu Jun 19 17:41:42 2014
-**      by: Qt User Interface Compiler version 4.8.2
+** Created: Thu Jun 19 23:55:20 2014
+**      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
