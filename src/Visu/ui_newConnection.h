@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'ConnectionUART.ui'
+** Form generated from reading UI file 'newConnection.ui'
 **
-** Created: Thu Jun 19 17:41:42 2014
+** Created: Thu Jun 19 17:41:43 2014
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_CONNECTIONUART_H
-#define UI_CONNECTIONUART_H
+#ifndef UI_NEWCONNECTION_H
+#define UI_NEWCONNECTION_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -189,9 +189,8 @@ public:
         label_2->setText(QApplication::translate("Form", "Data Direction:", 0, QApplication::UnicodeUTF8));
         directionComboBox->clear();
         directionComboBox->insertItems(0, QStringList()
-         << QApplication::translate("Form", "Transmitter", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("Form", "Receiver", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("Form", "Transceiver", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("Form", "Input", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("Form", "Output", 0, QApplication::UnicodeUTF8)
         );
         label_6->setText(QApplication::translate("Form", "Stop bits:", 0, QApplication::UnicodeUTF8));
         databitsCombobox->clear();
@@ -214,4 +213,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_CONNECTIONUART_H
+#endif // UI_NEWCONNECTION_H

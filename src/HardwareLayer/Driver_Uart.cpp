@@ -99,9 +99,9 @@ void Driver_Uart::ChangeSettings(unsigned int cSize, bool parityEnable, bool par
 			
 		if(tcsetattr(fd, TCSANOW, &options)== 0)		//set terminal attributes
 			cout << "Change settings and save" << endl;
-		else
+	/*	else
 			cout << "Can not save settings" << endl;
-		
+		*/
 	}else
 		cout << "Can not reas settings" << endl;
 } 

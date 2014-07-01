@@ -6,8 +6,8 @@
 #ifndef __WIRINGPI_DRIVER_
 #define __WIRINGPI_DRIVER_
 
-#include "Driver_I2C.h"
-#include "Driver_SPI.h"
+//#include "Driver_I2C.h"
+//#include "Driver_SPI.h"
 #include "Driver_Uart.h"
 #include <wiringPi.h>
 #endif

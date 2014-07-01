@@ -31,7 +31,7 @@ int main()
 	uart->SendData(&sendChar);	
 	uart->SendDataMessage(sendMessage);
 	uart->SendDataByte(c);	   
-	//uart->ReceiveData();
+	uart->ReceiveData();
 	
 	//uart->ChangeSettings(DATASIZE7,false,false,BAUD9600);
   }
