@@ -1,0 +1,21 @@
+#include <iostream>
+#include "GPIO_Driver.h"
+
+using namespace std;  
+
+int main() 
+{
+    Driver_I2C *i2c = new Driver_I2C();	
+    Driver_Uart *uart = new Driver_Uart();
+    Driver_SPI *spi = new Driver_SPI(0,500000);
+
+    S_driver sd;	 
+     	
+    wiringPiSetup();
+    cout << "Driver Test\n";
+    cout << "Setup wiringPI was seccussfull\n";
+    cout << "Try SPI connection\n";
+
+    
+    
+} 
