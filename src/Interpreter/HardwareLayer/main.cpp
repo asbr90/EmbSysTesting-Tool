@@ -10,7 +10,7 @@ int main()
 {
     Driver_Uart *uart = new Driver_Uart(DATASIZE7,false,false,BAUD9600);
     
-    S_driver sd;
+    //S_driver sd;
     char sendChar = 't';
 	char *sendMessage = "Hallo Welt";
 	unsigned char c = 'A';
@@ -27,7 +27,7 @@ int main()
     cout << "---------------------------------" <<endl;
    // spi->DUI_Initialization(sd);
   
-  if( uart->DUI_Initialization(sd)){
+  if( uart->DUI_Initialization()){
 	uart->SendData(&sendChar);	
 	uart->SendDataMessage(sendMessage);
 	uart->SendDataByte(c);	   

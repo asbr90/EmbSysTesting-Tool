@@ -35,6 +35,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <errno.h>
+#include <string>
 
 #define DATASIZE5	0
 #define DATASIZE6	1
@@ -47,7 +48,7 @@
 #define BAUD0		0 //disconnect
 #define	BAUD50		1
 #define	BAUD75		2
-#define BAUD110		3 
+#define BAUD110		3 
 #define BAUD134		4
 #define BAUD150		5
 #define BAUD200		6
@@ -58,8 +59,8 @@
 #define BAUD2400	11
 #define BAUD4800	12
 #define BAUD9600	13
-#define BAUD19200	14 
-#define BAUD38400	15 
+#define BAUD19200	14 
+#define BAUD38400	15 
 #define BAUD57600	16
 #define BAUD115200	17
 #define BAUD230400	16
@@ -88,14 +89,15 @@ class Driver_Uart: public DriverUsageInterface{
 public:
 	Driver_Uart(); 
 	Driver_Uart(unsigned int cSize, bool parityEnable, bool parityOdd, unsigned long baudrate);
-	bool DUI_Initialization(S_driver) ;
+    bool DUI_Initialization() ;
 	bool SendData(char*);
 	R_data ReceiveData(); 
 	bool SendDataMessage(char*);
 	bool SendDataByte(unsigned char);
 	void ChangeSettings(unsigned int , bool , bool , unsigned long );
 	void getSettings(uart_settings *settings);
-	
+    mosquitto_message convertToMessage(String data);
+    String convertToData(const *mosquitto_message);
 	int fd ;					/*File descriptor*/
 	struct termios options;		/*Advanced Serial Port Control*/
 	uart_settings UARTSettings;

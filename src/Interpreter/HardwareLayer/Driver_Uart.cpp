@@ -22,7 +22,23 @@ Driver_Uart::Driver_Uart(unsigned int cSize, bool parityEnable, bool parityOdd, 
 	
 }
 
-bool Driver_Uart::DUI_Initialization(S_driver){
+void Driver_Uart::transmitData(String data) {
+
+}
+String Driver_Uart::receiveData(){
+
+}
+
+String Driver_Uart::convertToData(const*mosquitto_message){
+
+}
+
+mosquitto_message Driver_Uart::convertToMessage(String data){
+
+}
+
+
+bool Driver_Uart::DUI_Initialization(){
 	cout << "Initialize UART Port" << endl;
 
 if ((fd = serialOpen ("/dev/ttyAMA0", 9600)) < 0)

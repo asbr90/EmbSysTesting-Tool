@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=-I/usr/local/include -L/usr/local/lib -lwiringPi
-SOURCES=main.cpp Driver_I2C.cpp Driver_SPI.cpp Driver_Uart.cpp
+SOURCES=main.cpp  Driver_Uart.cpp
 DISTDIR=../../../bin/
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=run

@@ -14,7 +14,9 @@
 
 class DriverUsageInterface: InterpreterInterface{
 	public:
-	 		
+    virtual void transmitData(String data) = 0;
+    virtual String receiveData() = 0;
+
 };
 #endif /*__DRIVER_USAGE_*/
 
