@@ -92,13 +92,14 @@ public:
 	Driver_Uart(unsigned int cSize, bool parityEnable, bool parityOdd, unsigned long baudrate);
     bool DUI_Initialization() ;
 	bool SendData(char*);
-	R_data ReceiveData(); 
+	const char* receiveData(); 
+	void transmitData(const char*ReceiveData data) ;
 	bool SendDataMessage(char*);
 	bool SendDataByte(unsigned char);
 	void ChangeSettings(unsigned int , bool , bool , unsigned long );
 	void getSettings(uart_settings *settings);
-    mosquitto_message convertToMessage(String data);
-    String convertToData(const *mosquitto_message);
+    mosquitto_message convertToMessage(string data);
+    string convertToData(const mosquitto_message*);
 
 	int fd ;					/*File descriptor*/
 	struct termios options;		/*Advanced Serial Port Control*/

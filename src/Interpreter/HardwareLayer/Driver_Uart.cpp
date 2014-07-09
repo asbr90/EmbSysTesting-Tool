@@ -22,18 +22,18 @@ Driver_Uart::Driver_Uart(unsigned int cSize, bool parityEnable, bool parityOdd, 
 	
 }
 
-void Driver_Uart::transmitData(String data) {
+void Driver_Uart::transmitData(const char* data) {
 
 }
-String Driver_Uart::receiveData(){
-
-}
-
-String Driver_Uart::convertToData(const*mosquitto_message){
+const char* Driver_Uart::receiveData(){
 
 }
 
-mosquitto_message Driver_Uart::convertToMessage(String data){
+string Driver_Uart::convertToData(const mosquitto_message*){
+
+}
+
+mosquitto_message Driver_Uart::convertToMessage(string data){
 
 }
 
@@ -77,14 +77,14 @@ bool Driver_Uart::SendDataByte(unsigned char c) {
  }
 return true;
 }
-
-R_data Driver_Uart::ReceiveData(){
+/*
+void Driver_Uart::ReceiveData(){
 	while(1){
 		putchar(serialGetchar(fd));
 		fflush(stdout);			
 	}
 }
-
+*/
 void Driver_Uart::ChangeSettings(unsigned int cSize, bool parityEnable, bool parityOdd, unsigned long baudrate){
 	
 	//set settings in the structure

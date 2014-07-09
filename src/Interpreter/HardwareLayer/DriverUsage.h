@@ -10,12 +10,11 @@
 
 #ifndef __DRIVER_USAGE_
 #define __DRIVER_USAGE_
-#include "../InterpreterInterface.h"
 
-class DriverUsageInterface: InterpreterInterface{
+class DriverUsageInterface{
 	public:
-    virtual void transmitData(String data) = 0;
-    virtual String receiveData() = 0;
+    virtual void transmitData(const char* data) = 0;
+    virtual const char* receiveData() = 0;
 
 };
 #endif /*__DRIVER_USAGE_*/

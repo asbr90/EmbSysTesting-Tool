@@ -27,13 +27,13 @@ int main()
     cout << "---------------------------------" <<endl;
    // spi->DUI_Initialization(sd);
 
-  if( uart->DUI_Initialization()){
+  /*if( uart->DUI_Initialization()){
     uart->SendData(&sendChar);
     uart->SendDataMessage(sendMessage);
     uart->SendDataByte(c);
     uart->ReceiveData();
 
     //uart->ChangeSettings(DATASIZE7,false,false,BAUD9600);
-  }
+  }*/
 
 }

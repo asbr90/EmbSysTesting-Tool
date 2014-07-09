@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-c -Wall
-LDFLAGS=-I/usr/local/include -L/usr/local/lib -lwiringPi
+CFLAGS=-c -Wall -ggdb -I/usr/local/include  -I../../../lib/mosquitto-1.1.2/lib -I../../../lib/mosquitto-1.1.2/lib/cpp
+LDFLAGS=-L/usr/local/lib -lwiringPi -L../../../lib/mosquitto-1.1.2/lib ../../../lib/mosquitto-1.1.2/lib/cpp/libmosquittopp.so.1 ../../../lib/mosquitto-1.1.2/lib/libmosquitto.so.1
 SOURCES=main.cpp  Driver_Uart.cpp
 DISTDIR=../../../bin/
 OBJECTS=$(SOURCES:.cpp=.o)
@@ -16,3 +16,4 @@ $(EXECUTABLE): $(OBJECTS)
 
 clean:
 	rm -rf *o $(EXECUTABLE)
+
