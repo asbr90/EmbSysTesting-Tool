@@ -1,21 +1,23 @@
 #include "Subscriber.h"
+#include <stdio.h>
 
-int Subscriber::ubscribeTopic(int *mid, const void *sub){
+using namespace std;
 
-}
-
-int Subscriber::unsubscribeTopic(int *mid, const void *sub){
-
-}
-
-int Subscriber::setSubscribeCallback(void((*on_publish)(struct mosquitto *, void *, int))){
+Subscriber::Subscriber(const char *id, const char *host, int port, int qos, const char *topic):MQTTv3(id,host,port,qos,topic){
 
 }
 
-int Subscriber::setSubscribeCallback(void((*on_subscribe)(struct mosquitto *, void *, int, int, const int *))){
-
+int Subscriber::subscribeTopic(int *mid, const char *sub, int qos){
+    this->mid = mid;
+    this->topic = sub;
+    this->qos = qos;
+    subscribe(this->mid, topic, this->qos);
 }
 
-int Subscriber::setUnsubscribeCallback(void((*on_unsubscribe)(struct mosquitto *, void *, int))){
+int Subscriber::unsubscribeTopic(){
+    unsubscribe(NULL, topic);
+}
 
+void Subscriber::on_connect(int rc){
+    subscribe(NULL, topic, qos);
 }

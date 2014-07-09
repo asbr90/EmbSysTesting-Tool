@@ -11,11 +11,20 @@
 #define __PUBLISHER_H_
 #include "MQTTv3.h"
 
-class Publisher : MQTTv3{
+class Publisher :public MQTTv3{
 public:
-    int publishMessage(int *mid, const void *payload, bool retain);
-    int setPublishCallback(void((*on_publish)(struct mosquitto *, void *, int)));
+    Publisher(const char *id, const char *host, int port, int qos, const char* topic);
+    void publishMessage(const char *message);
+    void publishMessage(const char *message, const char *topic);
 
+protected:
+    void on_connect(int rc);
+   /* virtual void on_disconnect(int rc){return;}
+    virtual void on_message(const struct mosquitto_message *message){return;}
+    virtual  void on_subscribe(int mid, int qos_count, const int *granted_qos){return;}
+    virtual  void on_unsubscribe(int mid){return;}
+    virtual void on_log(int level, const char *str){return;}
+    virtual void on_error(){return;}*/
 };
 
 #endif/*__PUBLISHER_H_*/

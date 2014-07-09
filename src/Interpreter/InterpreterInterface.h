@@ -10,11 +10,13 @@
 #define __INTERPRETER_INTERFACE_
 
 #include <mosquittopp.h>
+#include <string>
+
+using namespace std;
 
 class InterpreterInterface{
     public:
-    virtual mosquitto_message convertToMessage(String data) = 0;
-    virtual String convertToData(const *mosquitto_message) = 0;
-
+    virtual mosquitto_message convertToMessage(string data) = 0;
+    virtual string convertToData(const mosquitto_message*) = 0;
 };
 #endif /*__INTERPRETER_INTERFACE_*/

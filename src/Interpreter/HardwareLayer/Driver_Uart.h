@@ -29,6 +29,7 @@
 #ifndef __DRIVER_UART_
 #define __DRIVER_UART_
 #include "DriverUsage.h"
+#include "../InterpreterInterface.h"
 #include <wiringSerial.h>
 #include <termios.h>
 #include <unistd.h>
@@ -85,7 +86,7 @@ typedef struct {
 
 
 
-class Driver_Uart: public DriverUsageInterface{
+class Driver_Uart: public DriverUsageInterface, public InterpreterInterface{
 public:
 	Driver_Uart(); 
 	Driver_Uart(unsigned int cSize, bool parityEnable, bool parityOdd, unsigned long baudrate);
@@ -98,6 +99,7 @@ public:
 	void getSettings(uart_settings *settings);
     mosquitto_message convertToMessage(String data);
     String convertToData(const *mosquitto_message);
+
 	int fd ;					/*File descriptor*/
 	struct termios options;		/*Advanced Serial Port Control*/
 	uart_settings UARTSettings;

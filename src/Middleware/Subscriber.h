@@ -11,14 +11,20 @@
 #define __SUBSCRIBER_H_
 #include "MQTTv3.h"
 
-class Subscriber : MQTTv3{
+class Subscriber : public MQTTv3{
 public:
-    int subscribeTopic(int *mid, const void *sub);
-    int unsubscribeTopic(int *mid, const void *sub);
-    int setSubscribeCallback(void((*on_publish)(struct mosquitto *, void *, int)));
-    int setSubscribeCallback(void((*on_subscribe)(struct mosquitto *, void *, int, int, const int *)));
-    int setUnsubscribeCallback(void((*on_unsubscribe)(struct mosquitto *, void *, int)));
+    Subscriber(const char *id, const char *host, int port, int qos, const char* topic);
+    int subscribeTopic(int *mid, const char *sub,int qos);
+    int unsubscribeTopic();
+    void on_connect(int rc);
 
+
+   /* virtual void on_disconnect(int rc){return;}
+    virtual void on_message(const struct mosquitto_message *message){return;}
+    virtual void on_subscribe(int mid, int qos_count, const int *granted_qos){return;}
+    virtual void on_unsubscribe(int mid){return;}
+    virtual void on_log(int level, const char *str){return;}
+    virtual void on_error(){return;}*/
 };
 
 #endif/*__SUBSCRIBER_H_*/
