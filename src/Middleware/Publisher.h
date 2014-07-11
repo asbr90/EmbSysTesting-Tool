@@ -13,7 +13,7 @@
 
 class Publisher :public MQTTv3{
 public:
-    Publisher(const char *id, const char *host, int port, int qos, const char* topic);
+    Publisher(const char *id, const char *host, int port, int qos, const char* topic, InterpreterInterface *interpreter);
     void publishMessage(const char *message);
     void publishMessage(const char *message, const char *topic);
 

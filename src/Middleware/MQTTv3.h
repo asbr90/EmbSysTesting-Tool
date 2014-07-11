@@ -23,7 +23,7 @@ class MQTTv3 : public mosqpp::mosquittopp
 
 public:
     MQTTv3();
-    MQTTv3(const char *id, const char *host, int port, int qos, const char* topic);
+    MQTTv3(const char *id, const char *host, int port, int qos, const char* topic, InterpreterInterface* interpreter);
     ~MQTTv3();
     void initializeMQTTv3(const char* BrokerAddress, int BrokerPort,const char* HostID,const char* topic, int QoS);
     void updateValue(const void *payload);

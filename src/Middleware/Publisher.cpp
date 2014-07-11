@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Publisher::Publisher(const char *id, const char *host, int port, int qos, const char* topic) : MQTTv3(id,host,port,qos,topic){
+Publisher::Publisher(const char *id, const char *host, int port, int qos, const char* topic,InterpreterInterface* interpreter) : MQTTv3(id,host,port,qos,topic, interpreter){
 
 }
 

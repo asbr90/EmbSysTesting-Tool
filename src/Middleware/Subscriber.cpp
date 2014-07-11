@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Subscriber::Subscriber(const char *id, const char *host, int port, int qos, const char *topic):MQTTv3(id,host,port,qos,topic){
+Subscriber::Subscriber(const char *id, const char *host, int port, int qos, const char *topic, InterpreterInterface* interpreter):MQTTv3(id,host,port,qos,topic,interpreter){
 
 }
 
@@ -20,4 +20,9 @@ int Subscriber::unsubscribeTopic(){
 
 void Subscriber::on_connect(int rc){
     subscribe(NULL, topic, qos);
+}
+
+
+void Subscriber::on_message(const struct mosquitto_message *message){
+    Interpreter->interpretMessage(message);
 }

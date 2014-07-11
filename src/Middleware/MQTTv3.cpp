@@ -1,7 +1,7 @@
 #include "MQTTv3.h"
 #include <stdio.h>
 
-MQTTv3::MQTTv3(const char *id, const char *host, int port, int qos, const char* topic): mosquittopp(id)
+MQTTv3::MQTTv3(const char *id, const char *host, int port, int qos, const char* topic,InterpreterInterface* interpreter): mosquittopp(id)
 {
     mosqpp::lib_init();
 
@@ -11,6 +11,7 @@ MQTTv3::MQTTv3(const char *id, const char *host, int port, int qos, const char* 
     this->host = host;
     this->topic = topic;
     this->qos = qos;
+    this->Interpreter = interpreter;
 }
 
 
