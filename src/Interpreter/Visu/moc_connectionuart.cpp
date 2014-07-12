@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'connectionuart.h'
 **
-** Created: Fri Jun 20 00:22:16 2014
+** Created: Sat Jul 12 13:24:23 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ConnectionUART[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,7 @@ static const uint qt_meta_data_ConnectionUART[] = {
       60,   15,   15,   15, 0x0a,
       77,   15,   15,   15, 0x0a,
       93,   15,   15,   15, 0x0a,
+     110,   15,   15,   15, 0x0a,
 
        0        // eod
 };
@@ -45,6 +46,7 @@ static const char qt_meta_stringdata_ConnectionUART[] = {
     "ConnectionUART\0\0slotClose()\0storeSettings()\0"
     "storeDataBits()\0storeParityBit()\0"
     "storeBaudrate()\0storeDirection()\0"
+    "storeMQTT()\0"
 };
 
 void ConnectionUART::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -59,6 +61,7 @@ void ConnectionUART::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 3: _t->storeParityBit(); break;
         case 4: _t->storeBaudrate(); break;
         case 5: _t->storeDirection(); break;
+        case 6: _t->storeMQTT(); break;
         default: ;
         }
     }
@@ -99,9 +102,9 @@ int ConnectionUART::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

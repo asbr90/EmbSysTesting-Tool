@@ -13,6 +13,7 @@ ConnectionUART::ConnectionUART(QWidget *parent ) :  QWidget(parent){
     connect(parityComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(storeParityBit()));
     connect(baudCombobox, SIGNAL(currentIndexChanged(int)), this, SLOT(storeBaudrate()));
     connect(directionComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(storeDirection()));
+    connect(ActiveAsCombobox, SIGNAL(currentIndexChanged(int)), this, SLOT(storeMQTT()));
 
     this->storeDataBits();
     this->storeBaudrate();
@@ -27,6 +28,11 @@ void ConnectionUART::slotClose(){
 }
 
 
+void ConnectionUART::storeMQTT(){
+    this->mqttDirection = ActiveAsCombobox->currentIndex();
+
+}
+
 void ConnectionUART::storeSettings(){
     cout << "\nstoreSetting" << endl;
     //store the combobox values
@@ -36,8 +42,9 @@ void ConnectionUART::storeSettings(){
     cout << "Parity enable  :   "   << parityEnable     << endl;
     cout << "Baudrate   :   "       << baudrate         << endl;
     cout << "Direction  :   "       << dataDirection    << endl;
-
+    cout << "Active as  :   "       << mqttDirection    << endl;
   // this->uartDriver = new Driver_Uart();
+    //here create instance of interface for communicate beteween hardware and software
     new Channel();
 
     close();

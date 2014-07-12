@@ -10,10 +10,24 @@ EmbSysVisu::EmbSysVisu(QMainWindow *parent) : QMainWindow(parent){
         connect(actionQuit,SIGNAL (triggered()), this, SLOT(slotClose()));
         connect(actionUART, SIGNAL(triggered()), this, SLOT(newUART()));
 
+        Publisher *pub = new Publisher("EmbSysVisui", "localhost", 1883, 1, "EMBSYS", this);
 }
 
 EmbSysVisu::~EmbSysVisu(){
 }
+
+mosquitto_message EmbSysVisu::convertToMessage(string data){
+
+}
+
+string EmbSysVisu::convertToData(const mosquitto_message*){
+
+}
+
+void EmbSysVisu::interpretMessage(const mosquitto_message *){
+
+}
+
 
 void EmbSysVisu::newUART(){
     uart = new ConnectionUART();

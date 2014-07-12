@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ConnectionUART.ui'
 **
-** Created: Thu Jun 19 23:55:20 2014
+** Created: Sat Jul 12 13:23:46 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -42,6 +42,8 @@ public:
     QComboBox *directionComboBox;
     QLabel *label_6;
     QComboBox *databitsCombobox;
+    QLabel *label_7;
+    QComboBox *ActiveAsCombobox;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *CancelBtn;
@@ -73,7 +75,7 @@ public:
         label->setGeometry(QRect(110, 10, 291, 21));
         gridLayoutWidget = new QWidget(Form);
         gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(20, 39, 461, 201));
+        gridLayoutWidget->setGeometry(QRect(20, 39, 461, 203));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -126,6 +128,16 @@ public:
         databitsCombobox->setObjectName(QString::fromUtf8("databitsCombobox"));
 
         gridLayout->addWidget(databitsCombobox, 2, 1, 1, 1);
+
+        label_7 = new QLabel(gridLayoutWidget);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        gridLayout->addWidget(label_7, 5, 0, 1, 1);
+
+        ActiveAsCombobox = new QComboBox(gridLayoutWidget);
+        ActiveAsCombobox->setObjectName(QString::fromUtf8("ActiveAsCombobox"));
+
+        gridLayout->addWidget(ActiveAsCombobox, 5, 1, 1, 1);
 
         horizontalLayoutWidget = new QWidget(Form);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
@@ -201,6 +213,12 @@ public:
          << QApplication::translate("Form", "7", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("Form", "8", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("Form", "9", 0, QApplication::UnicodeUTF8)
+        );
+        label_7->setText(QApplication::translate("Form", "Active as:", 0, QApplication::UnicodeUTF8));
+        ActiveAsCombobox->clear();
+        ActiveAsCombobox->insertItems(0, QStringList()
+         << QApplication::translate("Form", "Publisher", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("Form", "Subscriber", 0, QApplication::UnicodeUTF8)
         );
         CancelBtn->setText(QApplication::translate("Form", "Cancel", 0, QApplication::UnicodeUTF8));
         ConnectBtn->setText(QApplication::translate("Form", "Connect", 0, QApplication::UnicodeUTF8));

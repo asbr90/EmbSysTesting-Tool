@@ -5,6 +5,10 @@
 #define DIR_RECEIVER    1
 #define DIR_Transceiver 2
 
+/*MQTTv3 active as*/
+#define SUBSCRIBER  1
+#define PUBLISHER   2
+
 #include "ui_ConnectionUART.h"
 #include "Channel.h"
 
@@ -21,6 +25,7 @@ public:
     bool parityEnable;
     unsigned long baudrate;
     short dataDirection;
+    int mqttDirection;
 
 signals:
     
@@ -31,7 +36,7 @@ public slots:
     void storeParityBit();
     void storeBaudrate();
     void storeDirection();
-
+    void storeMQTT();
 };
 
 #endif // CONNECTIONUART_H

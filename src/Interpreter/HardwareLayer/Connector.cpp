@@ -12,7 +12,7 @@ Connector::Connector(){
 
 void Connector::Connector_loop()
 {
-    Subscriber *rpi_subscriber = new Subscriber("Raspberry PI", "localhost", 1883, 1, "RPI/UART",this);
+    Subscriber *rpi_subscriber = new Subscriber("Raspberry PI", "localhost", 1883, 1, "EMBSYS",this);
     rpi_subscriber->async_Connect();
     connectFlag = true;
     this->process = RPI_CONNECTED;

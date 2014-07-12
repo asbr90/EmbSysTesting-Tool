@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'EmbSysVisu.h'
 **
-** Created: Wed Jul 2 08:10:35 2014
+** Created: Sat Jul 12 14:33:03 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -80,6 +80,8 @@ void *EmbSysVisu::qt_metacast(const char *_clname)
         return static_cast<void*>(const_cast< EmbSysVisu*>(this));
     if (!strcmp(_clname, "Ui::MainWindow"))
         return static_cast< Ui::MainWindow*>(const_cast< EmbSysVisu*>(this));
+    if (!strcmp(_clname, "InterpreterInterface"))
+        return static_cast< InterpreterInterface*>(const_cast< EmbSysVisu*>(this));
     return QMainWindow::qt_metacast(_clname);
 }
 

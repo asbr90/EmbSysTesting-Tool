@@ -12,4 +12,5 @@ LIBS += -l qwt-qt4
 # Input
 HEADERS += Channel.h connectionuart.h EmbSysVisu.h
 FORMS += ConnectionUART.ui EmbSysVisu.ui
-SOURCES += Channel.cpp connectionuart.cpp EmbSysVisu.cpp main.cpp
+SOURCES += Channel.cpp connectionuart.cpp main.cpp \
+    EmbSysVisu.cpp
