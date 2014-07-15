@@ -4,7 +4,8 @@
 #include "../../Middleware/Subscriber.h"
 #include "../../Middleware/Publisher.h"
 #include "../../Middleware/Message.h"
-#include "../../Middleware/MQTTv3.h"#include <iostream>
+#include "../../Middleware/MQTTv3.h"
+#include <iostream>
 #include <list>
 using namespace std;
 #define RPI_CONNECTED               1
@@ -27,5 +28,5 @@ public:
 
    bool connectFlag;
    int  process;
-   list<MQTTv3> mqttList;
+   list<MQTTv3*> mqttList;
 };

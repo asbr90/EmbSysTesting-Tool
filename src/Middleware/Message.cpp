@@ -7,6 +7,7 @@ Message::Message(int deviceID, int messageType, int deviceType, int typeOfConnec
     this->messageType = messageType;
     this->deviceType = deviceType;
     this->typeOfConnectedDevice = typeOfConnectedDevice;
+    this->delimiter = ";";
 }
 
 

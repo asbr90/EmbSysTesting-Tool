@@ -54,11 +54,13 @@ void Connector::Connector_loop()
 mosquitto_message Connector::convertToMessage(string data)
 {
     cout << "RPI convertToMessage"<< endl;
+   
 }
 
 string Connector::convertToData(const mosquitto_message*)
 {
     cout << "RPI convertToData" << endl;
+    return "";
 }
 
 void Connector::interpretMessage(const mosquitto_message* message)
@@ -105,12 +107,12 @@ void Connector::interpretMessage(const mosquitto_message* message)
 
               if(i_messageConnectedType == SUBSCRIBER){
                   if(i_messageDeviceType == UART_DEVICE){
-                      mqttList.push_back(new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
+                      mqttList.push_back((MQTTv3*)new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
                   }
                   if(i_messageDeviceType == SPI_DEVICE)
-                     mqttList->mqtt = new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/SPI", new Driver_Uart());   //TODO: new SPI instance
+                     mqttList.push_back ((MQTTv3*) new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/SPI", new Driver_Uart()));   //TODO: new SPI instance
                   if(i_messageDeviceType == I2C_DEVICE)
-                     mqttList->mqtt = new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/I2C", new Driver_Uart());  // TODO: new I2C instance
+                     mqttList.push_back((MQTTv3*)new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/I2C", new Driver_Uart()));  // TODO: new I2C instance
               }
             }
         }

@@ -44,7 +44,7 @@ public:
     string error_code;          /*contain any error code*/
     string data;                /*contain the data values*/
     string settings;            /*contain settings for devices*/
-    const char* delimiter = ";";
+    const char* delimiter;
 
 };
 
