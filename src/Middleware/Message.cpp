@@ -31,7 +31,7 @@ string  Message::config_message(string settings, int typeOfConnectedDevice)
 {
     this->settings = settings;
     this->typeOfConnectedDevice = typeOfConnectedDevice;
-    stringstream strs_id, strs_typeofConnectedDevice, strs_messageType, strs_settings;
+    stringstream strs_id, strs_typeofConnectedDevice, strs_messageType, strs_settings,strs_type;
 
     strs_id << this->deviceID;
     string s_deviceID = strs_id.str();
@@ -96,4 +96,8 @@ string  Message::error_message(string error_code)
     string s_messageType = strs_messageType.str();
 
     return (s_messageType + delimiter + s_deviceID  + delimiter + s_errorCode + delimiter);
+}
+
+const char* Message::stoc(string payload){
+    return payload.c_str();
 }

@@ -3,7 +3,6 @@
 #include "GPIO_Driver.h"
 #include "Connector.h"
 #include "../../Middleware/Message.h"
-
 using namespace std;
 
 Connector::Connector(){
@@ -119,10 +118,10 @@ void Connector::interpretMessage(const mosquitto_message* message)
 }
 
 
-int getmessageTypeAsInt(const char* s_payload, int number)
+int Connector::getmessageTypeAsInt(char* s_payload, int number)
 {
     int i_payload;
-    char *c_payload;
+     char *c_payload;
     int i;
 
     for(i=0;i < number; i++){
@@ -135,7 +134,7 @@ int getmessageTypeAsInt(const char* s_payload, int number)
 
 
 
-char* getmessageTypeAsString(const char* s_payload, int number)
+char* Connector::getmessageTypeAsString( char* s_payload, int number)
 {
     char *c_payload;
     int i;

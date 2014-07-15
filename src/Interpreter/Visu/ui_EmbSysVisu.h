@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'EmbSysVisu.ui'
 **
-** Created: Wed Jul 2 08:10:31 2014
+** Created: Sun Jul 13 18:49:21 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -22,6 +22,7 @@
 #include <QtGui/QMenuBar>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
+#include <QtGui/QToolBox>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 #include "qwt_plot.h"
@@ -44,10 +45,15 @@ public:
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
-    QLabel *label;
     QwtPlot *qwtPlot;
+    QLabel *label;
     QWidget *dataAnalyzer;
-    QWidget *dbb;
+    QWidget *datalogger;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout_2;
+    QToolBox *toolBox;
+    QWidget *page;
+    QWidget *page_2;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuNew_Connection;
@@ -95,13 +101,11 @@ public:
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label = new QLabel(verticalLayoutWidget);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        horizontalLayout->addWidget(label);
-
         qwtPlot = new QwtPlot(verticalLayoutWidget);
         qwtPlot->setObjectName(QString::fromUtf8("qwtPlot"));
+        label = new QLabel(qwtPlot);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(0, 0, 586, 687));
 
         horizontalLayout->addWidget(qwtPlot);
 
@@ -112,9 +116,30 @@ public:
         dataAnalyzer = new QWidget();
         dataAnalyzer->setObjectName(QString::fromUtf8("dataAnalyzer"));
         tabWidget->addTab(dataAnalyzer, QString());
-        dbb = new QWidget();
-        dbb->setObjectName(QString::fromUtf8("dbb"));
-        tabWidget->addTab(dbb, QString());
+        datalogger = new QWidget();
+        datalogger->setObjectName(QString::fromUtf8("datalogger"));
+        horizontalLayoutWidget = new QWidget(datalogger);
+        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(10, 10, 1191, 631));
+        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        toolBox = new QToolBox(horizontalLayoutWidget);
+        toolBox->setObjectName(QString::fromUtf8("toolBox"));
+        toolBox->setEnabled(true);
+        page = new QWidget();
+        page->setObjectName(QString::fromUtf8("page"));
+        page->setEnabled(false);
+        page->setGeometry(QRect(0, 0, 1189, 571));
+        toolBox->addItem(page, QString::fromUtf8("Page 1"));
+        page_2 = new QWidget();
+        page_2->setObjectName(QString::fromUtf8("page_2"));
+        page_2->setGeometry(QRect(0, 0, 1189, 571));
+        toolBox->addItem(page_2, QString::fromUtf8("Page 2"));
+
+        horizontalLayout_2->addWidget(toolBox);
+
+        tabWidget->addTab(datalogger, QString());
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -148,6 +173,7 @@ public:
         retranslateUi(MainWindow);
 
         tabWidget->setCurrentIndex(0);
+        toolBox->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -166,7 +192,9 @@ public:
         label->setText(QApplication::translate("MainWindow", "Channel:", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(logicAnalyzer), QApplication::translate("MainWindow", "Logic Analyzer", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(dataAnalyzer), QApplication::translate("MainWindow", "Data Analyzer", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(dbb), QApplication::translate("MainWindow", "BDD - Editor", 0, QApplication::UnicodeUTF8));
+        toolBox->setItemText(toolBox->indexOf(page), QApplication::translate("MainWindow", "Page 1", 0, QApplication::UnicodeUTF8));
+        toolBox->setItemText(toolBox->indexOf(page_2), QApplication::translate("MainWindow", "Page 2", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(datalogger), QApplication::translate("MainWindow", "Logger", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuNew_Connection->setTitle(QApplication::translate("MainWindow", "New Connection..", 0, QApplication::UnicodeUTF8));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));

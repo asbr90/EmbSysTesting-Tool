@@ -11,8 +11,10 @@
 
 #include <mosquittopp.h>
 #include <string>
-
+#include <list>
+#include "../Middleware/MQTTv3.h"
 using namespace std;
+
 
 class InterpreterInterface{
     public:

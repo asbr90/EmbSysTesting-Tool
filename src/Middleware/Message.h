@@ -30,19 +30,20 @@ public:
       */
     Message(int deviceID, int messageType, int deviceType=-1, int typeOfConnectedDevice = 0);
     string connect_message();
-    string config_message(string, int typeOfConnectedDevice);
+    string config_message(string settings, int typeOfConnectedDevice);
     string disconnect_message();
     string data_message(string);
     string error_message(string);
+    const char* stoc(string payload);
 
 public:
-    int deviceID;
-    int messageType;
-    int deviceType;
+    int deviceID;               /*every device gets his own id number*/
+    int messageType;            /*type of message*/
+    int deviceType;             /*type of devices. That are the types of sensors or other (end-)devices*/
     int typeOfConnectedDevice;  /*that means the device is a subscriber or publisher*/
-    string error_code;
-    string data;
-    string settings;
+    string error_code;          /*contain any error code*/
+    string data;                /*contain the data values*/
+    string settings;            /*contain settings for devices*/
     const char* delimiter = ";";
 
 };

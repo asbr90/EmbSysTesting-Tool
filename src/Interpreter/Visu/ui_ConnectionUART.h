@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ConnectionUART.ui'
 **
-** Created: Sat Jul 12 13:23:46 2014
+** Created: Sun Jul 13 18:04:37 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -20,6 +20,7 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QWidget>
 
@@ -44,6 +45,12 @@ public:
     QComboBox *databitsCombobox;
     QLabel *label_7;
     QComboBox *ActiveAsCombobox;
+    QLabel *label_10;
+    QLabel *label_9;
+    QLineEdit *storagefilenameText;
+    QLineEdit *columnsText;
+    QLineEdit *delimiterText;
+    QLabel *label_8;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *CancelBtn;
@@ -53,7 +60,7 @@ public:
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName(QString::fromUtf8("Form"));
-        Form->resize(491, 306);
+        Form->resize(491, 452);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(19);
         sizePolicy.setVerticalStretch(0);
@@ -75,7 +82,7 @@ public:
         label->setGeometry(QRect(110, 10, 291, 21));
         gridLayoutWidget = new QWidget(Form);
         gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(20, 39, 461, 203));
+        gridLayoutWidget->setGeometry(QRect(20, 39, 461, 331));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -139,9 +146,39 @@ public:
 
         gridLayout->addWidget(ActiveAsCombobox, 5, 1, 1, 1);
 
+        label_10 = new QLabel(gridLayoutWidget);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        gridLayout->addWidget(label_10, 8, 0, 1, 1);
+
+        label_9 = new QLabel(gridLayoutWidget);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout->addWidget(label_9, 7, 0, 1, 1);
+
+        storagefilenameText = new QLineEdit(gridLayoutWidget);
+        storagefilenameText->setObjectName(QString::fromUtf8("storagefilenameText"));
+
+        gridLayout->addWidget(storagefilenameText, 7, 1, 1, 1);
+
+        columnsText = new QLineEdit(gridLayoutWidget);
+        columnsText->setObjectName(QString::fromUtf8("columnsText"));
+
+        gridLayout->addWidget(columnsText, 8, 1, 1, 1);
+
+        delimiterText = new QLineEdit(gridLayoutWidget);
+        delimiterText->setObjectName(QString::fromUtf8("delimiterText"));
+
+        gridLayout->addWidget(delimiterText, 6, 1, 1, 1);
+
+        label_8 = new QLabel(gridLayoutWidget);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout->addWidget(label_8, 6, 0, 1, 1);
+
         horizontalLayoutWidget = new QWidget(Form);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(26, 240, 451, 44));
+        horizontalLayoutWidget->setGeometry(QRect(26, 380, 451, 44));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -155,6 +192,11 @@ public:
 
         horizontalLayout->addWidget(ConnectBtn);
 
+        line->raise();
+        label->raise();
+        gridLayoutWidget->raise();
+        horizontalLayoutWidget->raise();
+        label_10->raise();
 
         retranslateUi(Form);
 
@@ -220,6 +262,9 @@ public:
          << QApplication::translate("Form", "Publisher", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("Form", "Subscriber", 0, QApplication::UnicodeUTF8)
         );
+        label_10->setText(QApplication::translate("Form", "Columns number:", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("Form", "Filename:", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("Form", "Delimiter:", 0, QApplication::UnicodeUTF8));
         CancelBtn->setText(QApplication::translate("Form", "Cancel", 0, QApplication::UnicodeUTF8));
         ConnectBtn->setText(QApplication::translate("Form", "Connect", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

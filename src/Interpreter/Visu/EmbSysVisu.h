@@ -8,6 +8,8 @@
 #include "../../Middleware/Subscriber.h"
 #include "../../Middleware/Publisher.h"
 #include "../InterpreterInterface.h"
+#include <list>
+
 class EmbSysVisu : public QMainWindow, public Ui::MainWindow, public InterpreterInterface{
         Q_OBJECT
 
@@ -26,5 +28,7 @@ class EmbSysVisu : public QMainWindow, public Ui::MainWindow, public Interpreter
 
         public:
                  ConnectionUART *uart;
+                 Publisher *pub;
+                 list<Channel*> *channelList;
 };
 #endif //EMBSYS_H

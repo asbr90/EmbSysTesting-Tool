@@ -1,7 +1,6 @@
 #include "EmbSysVisu.h"
 #include <qwt_plot_curve.h>
 #include <qwt_plot.h>
-
 #include <iostream>
 using namespace std;
 
@@ -9,8 +8,10 @@ EmbSysVisu::EmbSysVisu(QMainWindow *parent) : QMainWindow(parent){
         setupUi(this);
         connect(actionQuit,SIGNAL (triggered()), this, SLOT(slotClose()));
         connect(actionUART, SIGNAL(triggered()), this, SLOT(newUART()));
+        centralWidget()->hide();
 
-        Publisher *pub = new Publisher("EmbSysVisui", "localhost", 1883, 1, "EMBSYS", this);
+        pub = new Publisher("EmbSysVisui", "localhost", 1883, 1, "EMBSYS", this);
+        pub->async_Connect();
 }
 
 EmbSysVisu::~EmbSysVisu(){
@@ -31,9 +32,12 @@ void EmbSysVisu::interpretMessage(const mosquitto_message *){
 
 void EmbSysVisu::newUART(){
     uart = new ConnectionUART();
+    uart->setList(channelList);
+    uart->setPublisher(pub);
+    uart->showPanels(centralWidget());
     uart->show();
 
-   double x[101];
+  /* double x[101];
     double y[101];
 
     for ( int i = 0; i < 101; i++ ) {
@@ -44,11 +48,12 @@ void EmbSysVisu::newUART(){
     QwtPlotCurve *curve = new QwtPlotCurve();
     curve->setRawData(x, y, 101);
     curve->attach(qwtPlot);
-    qwtPlot->replot();
+    qwtPlot->replot();*/
 
 }
 
 void EmbSysVisu::slotClose(){
+    pub->disconnect();
     close();
 }
 
