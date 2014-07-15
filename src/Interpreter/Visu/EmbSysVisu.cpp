@@ -8,10 +8,10 @@ EmbSysVisu::EmbSysVisu(QMainWindow *parent) : QMainWindow(parent){
         setupUi(this);
         connect(actionQuit,SIGNAL (triggered()), this, SLOT(slotClose()));
         connect(actionUART, SIGNAL(triggered()), this, SLOT(newUART()));
-        centralWidget()->hide();
+        connect(connectBtn, SIGNAL(pressed()),this,SLOT(connectionHandler()));
 
-        pub = new Publisher("EmbSysVisui", "localhost", 1883, 1, "EMBSYS", this);
-        pub->async_Connect();
+        tabWidget->hide();
+
 }
 
 EmbSysVisu::~EmbSysVisu(){
@@ -29,27 +29,24 @@ void EmbSysVisu::interpretMessage(const mosquitto_message *){
 
 }
 
+void EmbSysVisu::connectionHandler()
+{
+
+    int s_port = port->text().toInt();
+    int s_qos  = qos->text().toInt();
+    const char* s_host = host->text().toStdString().c_str();
+
+    this->pub = new Publisher("EmbSysVisu", s_host, s_port, s_qos, "EMBSYS", this);
+    pub->async_Connect();
+}
+
 
 void EmbSysVisu::newUART(){
     uart = new ConnectionUART();
     uart->setList(channelList);
     uart->setPublisher(pub);
-    uart->showPanels(centralWidget());
+    uart->showPanels(tabWidget);
     uart->show();
-
-  /* double x[101];
-    double y[101];
-
-    for ( int i = 0; i < 101; i++ ) {
-        x[i] =  i / 10.0;
-        y[i] = sin(x[i]);
-    }
-
-    QwtPlotCurve *curve = new QwtPlotCurve();
-    curve->setRawData(x, y, 101);
-    curve->attach(qwtPlot);
-    qwtPlot->replot();*/
-
 }
 
 void EmbSysVisu::slotClose(){

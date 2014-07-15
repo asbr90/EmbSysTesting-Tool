@@ -12,7 +12,7 @@ MQTTv3::MQTTv3(const char *id, const char *host, int port, int qos, const char* 
     this->topic = topic;
     this->qos = qos;
     this->Interpreter = interpreter;
-    cout << "topic on MQTTv3 "<< this->topic << endl;
+    cout << "Topic on MQTTv3 "<< this->topic << endl;
 }
 
 

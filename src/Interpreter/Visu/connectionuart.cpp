@@ -37,7 +37,7 @@ void ConnectionUART::storeFileSettings(){
     this->columns = columnsText->text().toInt();
 }
 
-void ConnectionUART::setList(list<Channel*> *channelList){
+void ConnectionUART::setList(list<Channel*> channelList){
     this->channelList = channelList;
 }
 
@@ -74,8 +74,8 @@ void ConnectionUART::storeSettings(){
 
     datalogger *logger = new datalogger(msg->stoc(delimiter), UART_DEVICE,  msg->stoc(filename), columns);
     pub->publishMessage(msg->stoc(msg->config_message(s_settings,mqttDirection)));
-    channelList->push_back(new Channel(UART_DEVICE,logger));
-    centralWidget->show();
+    channelList.push_back(new Channel(UART_DEVICE,logger));
+    tabwidget->show();
    close();
 }
 
@@ -122,6 +122,6 @@ string ConnectionUART::generateSettings(Message *msg)
 }
 
 
-void ConnectionUART:: showPanels(QWidget* centralWidget){
-    this->centralWidget = centralWidget;
+void ConnectionUART:: showPanels(QTabWidget* tabwidget){
+    this->tabwidget = tabwidget;
 }

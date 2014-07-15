@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'EmbSysVisu.ui'
 **
-** Created: Sun Jul 13 18:49:21 2014
+** Created: Tue Jul 15 20:50:34 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -17,9 +17,11 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QLineEdit>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QPushButton>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
 #include <QtGui/QToolBox>
@@ -54,6 +56,13 @@ public:
     QToolBox *toolBox;
     QWidget *page;
     QWidget *page_2;
+    QLabel *label_2;
+    QLineEdit *host;
+    QLabel *label_3;
+    QLineEdit *port;
+    QLabel *label_4;
+    QLineEdit *qos;
+    QPushButton *connectBtn;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuNew_Connection;
@@ -66,7 +75,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->setEnabled(true);
-        MainWindow->resize(1216, 783);
+        MainWindow->resize(1216, 875);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QString::fromUtf8("actionOpen"));
         actionSave = new QAction(MainWindow);
@@ -85,7 +94,7 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setGeometry(QRect(0, 0, 1211, 751));
+        tabWidget->setGeometry(QRect(10, 50, 1211, 751));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Ignored);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -130,7 +139,7 @@ public:
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
         page->setEnabled(false);
-        page->setGeometry(QRect(0, 0, 1189, 571));
+        page->setGeometry(QRect(0, 0, 100, 30));
         toolBox->addItem(page, QString::fromUtf8("Page 1"));
         page_2 = new QWidget();
         page_2->setObjectName(QString::fromUtf8("page_2"));
@@ -140,6 +149,27 @@ public:
         horizontalLayout_2->addWidget(toolBox);
 
         tabWidget->addTab(datalogger, QString());
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(20, 20, 57, 20));
+        host = new QLineEdit(centralwidget);
+        host->setObjectName(QString::fromUtf8("host"));
+        host->setGeometry(QRect(60, 20, 113, 21));
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(210, 20, 57, 20));
+        port = new QLineEdit(centralwidget);
+        port->setObjectName(QString::fromUtf8("port"));
+        port->setGeometry(QRect(250, 20, 113, 21));
+        label_4 = new QLabel(centralwidget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(400, 20, 57, 20));
+        qos = new QLineEdit(centralwidget);
+        qos->setObjectName(QString::fromUtf8("qos"));
+        qos->setGeometry(QRect(440, 20, 113, 21));
+        connectBtn = new QPushButton(centralwidget);
+        connectBtn->setObjectName(QString::fromUtf8("connectBtn"));
+        connectBtn->setGeometry(QRect(580, 20, 88, 31));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -195,6 +225,13 @@ public:
         toolBox->setItemText(toolBox->indexOf(page), QApplication::translate("MainWindow", "Page 1", 0, QApplication::UnicodeUTF8));
         toolBox->setItemText(toolBox->indexOf(page_2), QApplication::translate("MainWindow", "Page 2", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(datalogger), QApplication::translate("MainWindow", "Logger", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("MainWindow", "Host:", 0, QApplication::UnicodeUTF8));
+        host->setText(QApplication::translate("MainWindow", "localhost", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("MainWindow", "Port:", 0, QApplication::UnicodeUTF8));
+        port->setText(QApplication::translate("MainWindow", "1883", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("MainWindow", "QoS:", 0, QApplication::UnicodeUTF8));
+        qos->setText(QApplication::translate("MainWindow", "1", 0, QApplication::UnicodeUTF8));
+        connectBtn->setText(QApplication::translate("MainWindow", "Connect", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuNew_Connection->setTitle(QApplication::translate("MainWindow", "New Connection..", 0, QApplication::UnicodeUTF8));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));

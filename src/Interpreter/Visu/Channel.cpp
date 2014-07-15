@@ -12,12 +12,12 @@ Channel::Channel(int deviceType,datalogger *logger){
     this->logger = logger;
 
     if(deviceType == UART_DEVICE){
-        string id = "UART";
-        this->subscribeChannel = new Subscriber(stoc(id),"localhost", 1883, 1, "EMBSYS/UART",this);
+        string id = "UART";         //TODO: initialize topic automaticly
+        this->subscribeChannel = new Subscriber("UART","192.168.178.39", 1883, 1,"EMBSY/UART" ,this);
         this->subscribeChannel->async_Connect();
         numberUART++;
     }
-    //TODO: same issues for I2C and SPI
+    //TODO: same processer for I2C and SPI
 
 }
 

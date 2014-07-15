@@ -25,10 +25,11 @@ class EmbSysVisu : public QMainWindow, public Ui::MainWindow, public Interpreter
                   */
                 void slotClose();
                 void newUART();
+                void connectionHandler();
 
         public:
                  ConnectionUART *uart;
                  Publisher *pub;
-                 list<Channel*> *channelList;
+                 list<Channel*> channelList;
 };
 #endif //EMBSYS_H

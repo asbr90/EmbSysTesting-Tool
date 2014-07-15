@@ -3,7 +3,7 @@
 using namespace std;
 
 Publisher::Publisher(const char *id, const char *host, int port, int qos, const char* topic,InterpreterInterface* interpreter) : MQTTv3(id,host,port,qos,topic, interpreter){
-
+    cout << "Topic on Publisher" <<endl;
 }
 
 void Publisher::on_connect(int rc){

@@ -25,7 +25,7 @@ class ConnectionUART : public QWidget, public Ui::Form
 public:
     explicit ConnectionUART(QWidget *parent = 0);
     void setPublisher(Publisher* pub);
-    void setList(list<Channel*> *channelList);
+    void setList(list<Channel*> channelList);
 private:
     /**
       * @brief Generate string of registered settings.
@@ -45,9 +45,9 @@ public:
     int columns;
     string filename;
     Publisher* pub;
-    list<Channel*> *channelList;
-    QWidget* centralWidget;
-    void showPanels(QWidget* centralWidget);
+    list<Channel*> channelList;
+    QTabWidget* tabwidget;
+    void showPanels(QTabWidget* tabwidget);
 signals:
     
 public slots:
