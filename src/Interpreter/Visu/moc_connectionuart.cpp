@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'connectionuart.h'
 **
-** Created: Wed Jul 16 18:50:50 2014
+** Created: Wed Jul 16 20:07:00 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

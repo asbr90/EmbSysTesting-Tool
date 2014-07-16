@@ -58,6 +58,26 @@ void EmbSysVisu::Caller_Log(const char* log){
 }
 
 
+void EmbSysVisu::Caller_Subscribe(const char* topic, int qos)
+{
+
+}
+
+void EmbSysVisu::Caller_Publish(const char* message, const char* topic)
+{
+
+}
+
+void EmbSysVisu::Caller_Unsubscribe()
+{
+
+}
+
+void EmbSysVisu::interpretMessage(const mosquitto_message* message)
+{
+
+}
+
 void EmbSysVisu::disconnectHandler()
 {
     pub->disconnectFromBroker();

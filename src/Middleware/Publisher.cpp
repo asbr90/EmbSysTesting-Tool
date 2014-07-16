@@ -9,7 +9,6 @@ Publisher::Publisher(const char *id, const char *host, int port, int qos, const 
 void Publisher::on_connect(int rc)
 {
     Interpreter->Caller_Connect(rc);
-    publish(NULL,this->topic);
 }
 
 void Publisher::on_disconnect(int rc)

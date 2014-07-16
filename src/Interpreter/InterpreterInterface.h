@@ -12,6 +12,7 @@
 #include <mosquittopp.h>
 #include <string>
 #include <list>
+#include <iostream>
 using namespace std;
 
 
@@ -51,32 +52,28 @@ class InterpreterInterface{
     virtual void Caller_Log(const char* log) =0;
 
     /**
-      * @brief Caller function will be used if subscriber get message on his topic. This function is not pur virtual.
-      *        That means that this function can be overridden. If not, an empty function called.
+      * @brief Caller function will be used if subscriber get message on his topic. 
       * @param topic get the topic on which message received.
       * @param qos is the qos for this topic.
       */
-    void Caller_Subscribe(const char* topic, int qos) {}
+    virtual void Caller_Subscribe(const char* topic, int qos) = 0;
 
     /**
-      * @brief Caller function will be used if publish message on topic. This function is not pur virtual.
-      *        That means that this function can be overridden. If not, an empty function called.
+      * @brief Caller function will be used if publish message on topic. 
       * @param message is the message that published.
       * @param topic is topic on which the message published
       */
-    void Caller_Publish(const char* message, const char* topic) {}
+     virtual void Caller_Publish(const char* message, const char* topic) =0;
 	
      /**
-      * @brief Caller function will be used if unsubscriber from his topic. This function is not pur virtual.
-      *        That means that this function can be overridden. If not, an empty function called.
+      * @brief Caller function will be used if unsubscriber from his topic. 
       */    	
-     void Caller_Unsubscribe() {}
+    virtual void Caller_Unsubscribe() = 0;
 
     /**
-      * @brief This function should be used to interpret the incoming message. This function is not pur virtual.
-      *        That means that this function can be overridden. If not, an empty function called.
+      * @brief This function should be used to interpret the incoming message. 
       * @param mosquitto_message is structure with infromation about whole message. For more information about this see mosquitto.h.
       */
-    void interpretMessage(const mosquitto_message*) {}
+    virtual void interpretMessage(const mosquitto_message* message)=0;
 };
 #endif /*__INTERPRETER_INTERFACE_*/
