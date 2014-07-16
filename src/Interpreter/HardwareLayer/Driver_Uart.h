@@ -98,8 +98,10 @@ public:
 	bool SendDataByte(unsigned char);
 	void ChangeSettings(unsigned int , bool , bool , unsigned long );
 	void getSettings(uart_settings *settings);
-    mosquitto_message convertToMessage(string data);
-    string convertToData(const mosquitto_message*);
+    void Caller_Connect(int rc);
+    void Caller_Disconnect(int rc);
+    void Caller_Message(const char* message);
+    void Caller_Log(const char* log) ;
     void interpretMessage(const mosquitto_message *);
 	int fd ;					/*File descriptor*/
 	struct termios options;		/*Advanced Serial Port Control*/

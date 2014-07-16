@@ -19,9 +19,11 @@ class Connector: public InterpreterInterface
 {
 public:
    Connector();
-   mosquitto_message convertToMessage(string data);
-   string convertToData(const mosquitto_message*);
-   void interpretMessage(const mosquitto_message *);
+   void Caller_Connect(int rc);
+   void Caller_Disconnect(int rc);
+   void Caller_Message(const char* message);
+   void Caller_Log(const char* log) ;
+   void interpretMessage(const char *);
    void Connector_loop();
    char* getmessageTypeAsString(char* s_payload, int number);
    int getmessageTypeAsInt(char* s_payload, int number);

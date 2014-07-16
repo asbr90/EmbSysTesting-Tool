@@ -27,20 +27,24 @@ void Driver_Uart::transmitData(const char* data) {
 }
 
 const char* Driver_Uart::receiveData(){
-
+return 0;
 }
 
-string Driver_Uart::convertToData(const mosquitto_message*){
-
+void Driver_Uart::Caller_Connect(int rc)
+{
+	
 }
 
-mosquitto_message Driver_Uart::convertToMessage(string data){
-
+void Driver_Uart::Caller_Disconnect(int rc)
+{
 }
 
-
-void Driver_Uart::interpretMessage(const mosquitto_message *){
-
+void Driver_Uart::Caller_Message(const char* message)
+{
+}
+void Driver_Uart::Caller_Log(const char* log)
+{
+	
 }
 
 bool Driver_Uart::DUI_Initialization(){

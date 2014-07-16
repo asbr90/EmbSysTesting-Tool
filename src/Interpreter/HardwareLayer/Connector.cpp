@@ -50,24 +50,29 @@ void Connector::Connector_loop()
 
 }
 
-
-mosquitto_message Connector::convertToMessage(string data)
+void Connector::Caller_Connect(int rc)
 {
-    cout << "RPI convertToMessage"<< endl;
-   
+	cout << "Connectors connection success" <<endl;
 }
 
-string Connector::convertToData(const mosquitto_message*)
+void Connector::Caller_Disconnect(int rc)
 {
-    cout << "RPI convertToData" << endl;
-    return "";
 }
 
-void Connector::interpretMessage(const mosquitto_message* message)
+void Connector::Caller_Message(const char* message)
+{
+	//cout <<  "Received message: " <<message<<endl;
+}
+void Connector::Caller_Log(const char* log)
+{
+	
+}
+
+void Connector::interpretMessage(const char* message)
 {
     int i_messagetype,i_messageID,i_messageConnectedType,i_messageSetting,i_messageDeviceType;
     char* c_messageDeviceType;
-
+	 cout << "RPI interpretMessage "<<endl;
     if(process == RPI_CONNECTED){
 		if(message->payload != 0){
         char *s_payload = (char*)message->payload;
@@ -106,7 +111,7 @@ void Connector::interpretMessage(const mosquitto_message* message)
               i_messageSetting = getmessageTypeAsInt(s_payload,4);
               i_messageConnectedType = getmessageTypeAsInt(s_payload,5);
 
-              if(i_messageConnectedType == SUBSCRIBER){
+              if(i_messageConnectedType == SUBSCRIBER_CONNECTED){
                   if(i_messageDeviceType == UART_DEVICE){
 						cout << "Add new Subscriber at list"<<endl;
                       mqttList.push_back((MQTTv3*)new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
