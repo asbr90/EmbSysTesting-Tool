@@ -30,20 +30,15 @@ public:
     /**
       * @brief Asynchronous connection between client and broker.
       */
-    int async_Connect();
-    int sync_Connect();
-    int disconnectFromBroker(void);
-    int reconnect();
+    void async_Connect();
+    void sync_Connect();
+    void disconnectFromBroker(void);
+    void reconnect();
     void send_Message(const char * message);
-   /* int setConnectCallback (void ((*on_connect)(struct mosquitto *, void *, int)));
-    int setDisconnectCallback(void 	((*on_disconnect)(struct mosquitto *, void *, int)));
-    int setMessageCallback( void((*on_message)(struct mosquitto *, void *, const struct mosquitto_message *)));
-    int setLogCallback(void ((*on_unsubscribe)(struct mosquitto *, void *, int, const char *)));
-    */
     void ErrorCode(int error_code);
 
 protected:
-    const char * host;
+    const char *host;
     int port;
     const char* topic;
     const char* id;
@@ -51,6 +46,7 @@ protected:
     int keepalive ;
     int error_code;
     int *mid;
+
 
 public:
     virtual  void on_connect(int rc){return;}

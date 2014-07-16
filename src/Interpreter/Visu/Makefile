@@ -11,8 +11,8 @@
 CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED
-CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)
-CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)
+CFLAGS        = -pipe -O2 -W -D_REENTRANT $(DEFINES)
+CXXFLAGS      = -pipe -O2 -W -D_REENTRANT $(DEFINES)
 INCPATH       = -I/opt/QtSDK/Desktop/Qt/4.8.1/gcc/mkspecs/linux-g++ -I. -I/opt/QtSDK/Desktop/Qt/4.8.1/gcc/include/QtCore -I/opt/QtSDK/Desktop/Qt/4.8.1/gcc/include/QtGui -I/opt/QtSDK/Desktop/Qt/4.8.1/gcc/include -I/usr/include/qwt-qt4 -I. -I.
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/opt/QtSDK/Desktop/Qt/4.8.1/gcc/lib

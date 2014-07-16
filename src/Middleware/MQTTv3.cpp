@@ -12,9 +12,7 @@ MQTTv3::MQTTv3(const char *id, const char *host, int port, int qos, const char* 
     this->topic = topic;
     this->qos = qos;
     this->Interpreter = interpreter;
-    cout << "topic on MQTTv3 "<< this->topic << endl;
 }
-
 
 void MQTTv3::on_message(const struct mosquitto_message *message){
     printf("\t%s %s\n",message->topic, message->payload);
@@ -22,22 +20,24 @@ void MQTTv3::on_message(const struct mosquitto_message *message){
 
 void MQTTv3::on_log(int level, const char *str){
     cout << str << endl;
+    Interpreter->Caller_Log(str);
 }
 
-int MQTTv3::async_Connect(){
-   error_code = connect_async(host, port, keepalive);
-   loop_start();
+void MQTTv3::async_Connect(){
+    error_code = connect_async(host, port, keepalive);
+    loop_start();
 }
 
-int MQTTv3::sync_Connect(){
+void MQTTv3::sync_Connect(){
     error_code= connect(host, port, keepalive);
 }
 
-int MQTTv3::disconnectFromBroker(void){
-   error_code=disconnect();
+void MQTTv3::disconnectFromBroker(void){
+
+    error_code = disconnect();
 }
 
-int MQTTv3::reconnect(){
+void MQTTv3::reconnect(){
 
 }
 

@@ -3,36 +3,47 @@
 #include <qwt_plot.h>
 #include "tools.h"
 
-Channel::Channel(int deviceType,datalogger *logger){
+Channel::Channel(int deviceType,datalogger *logger, const char* host){
     static int numberUART=1;
     static int numberI2C=1;
     static int numberSPI=1;
-    cout << "New Channel" << endl;
+
     this->ChannelID = ChannelID;
     this->logger = logger;
 
     if(deviceType == UART_DEVICE){
-        string id = "UART";
-        this->subscribeChannel = new Subscriber(stoc(id),"localhost", 1883, 1, "EMBSYS/UART",this);
+        string id = "UART";         //TODO: initialize topic automaticly
+        cout << host <<endl;
+        this->subscribeChannel = new Subscriber("UART",host, 1883, 1,"EMBSYS/UART" ,this);
         this->subscribeChannel->async_Connect();
         numberUART++;
     }
-    //TODO: same issues for I2C and SPI
-
-}
-
-mosquitto_message Channel::convertToMessage(string data){
-
-}
-
-string Channel::convertToData(const mosquitto_message*){
+    //TODO: same processer for I2C and SPI
 
 }
 
 void Channel::interpretMessage(const mosquitto_message *message){
-    cout << "interpret Message"<< endl;
     char *s_payload = (char*)message->payload;
     logger->writeData(s_payload);
+}
+
+void Channel::Caller_Connect(int rc)
+{
+
+}
+
+void Channel::Caller_Disconnect(int rc)
+{
+
+}
+
+void Channel::Caller_Message(const char* message)
+{
+
+}
+
+void Channel::Caller_Log(const char* log){
+
 }
 
 const char* Channel::stoc(string payload){

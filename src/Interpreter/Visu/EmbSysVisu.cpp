@@ -4,56 +4,90 @@
 #include <iostream>
 using namespace std;
 
-EmbSysVisu::EmbSysVisu(QMainWindow *parent) : QMainWindow(parent){
-        setupUi(this);
-        connect(actionQuit,SIGNAL (triggered()), this, SLOT(slotClose()));
-        connect(actionUART, SIGNAL(triggered()), this, SLOT(newUART()));
-        centralWidget()->hide();
 
-        pub = new Publisher("EmbSysVisui", "localhost", 1883, 1, "EMBSYS", this);
-        pub->async_Connect();
+EmbSysVisu::EmbSysVisu(QMainWindow *parent) : QMainWindow(parent){
+    setupUi(this);
+    connect(actionQuit,SIGNAL (triggered()), this, SLOT(slotClose()));
+    connect(actionUART, SIGNAL(triggered()), this, SLOT(newUART()));
+    connect(connectBtn, SIGNAL(clicked()),this,SLOT(connectionHandler()));
+    connect(disconnectBtn, SIGNAL(clicked()),this,SLOT(disconnectHandler()));
+
+    disconnectBtn->setEnabled(false);
 }
 
 EmbSysVisu::~EmbSysVisu(){
+    pub->disconnectFromBroker();
 }
 
-mosquitto_message EmbSysVisu::convertToMessage(string data){
+
+void EmbSysVisu::Caller_Connect(int rc)
+{
+    if(rc == 0)
+        ConnectionState->setText("Connection: success");
+    else if(rc == 1)
+        ConnectionState->setText("Connection: unacceptable protocol version");
+    else if(rc == 2)
+        ConnectionState->setText("Connection: identifier rejected");
+    else if(rc == 3)
+        ConnectionState->setText("Connection: broker unavailable");
+    else
+        ConnectionState->setText("Connection: reserved for future use");
+
+    disconnectBtn->setEnabled(true);
+    connectBtn->setEnabled(false);
+}
+
+void EmbSysVisu::Caller_Disconnect(int rc)
+{
+    if(rc != 0)
+        ConnectionState->setText("Connection: disconnect is unexpected");
+    else
+        ConnectionState->setText("Connection: disconnected");
+
+    disconnectBtn->setEnabled(false);
+    connectBtn->setEnabled(true);
+}
+
+void EmbSysVisu::Caller_Message(const char* message)
+{
 
 }
 
-string EmbSysVisu::convertToData(const mosquitto_message*){
+void EmbSysVisu::Caller_Log(const char* log){
 
 }
 
-void EmbSysVisu::interpretMessage(const mosquitto_message *){
 
+void EmbSysVisu::disconnectHandler()
+{
+    pub->disconnectFromBroker();
+}
+
+void EmbSysVisu::connectionHandler()
+{
+    if(!port->text().isEmpty() && !qos->text().isEmpty() && !host->text().isEmpty()){
+        this->ConnectorHost = host->text().toStdString().c_str();
+        this->ConnectorPort = port->text().toInt();
+        this->ConnectorTopic = "EMBSYS";
+        int s_qos  = qos->text().toInt();
+        this->pub = new Publisher("EmbSysVisu", ConnectorHost, ConnectorPort, s_qos, ConnectorTopic, this);
+        pub->async_Connect();
+    }
 }
 
 
 void EmbSysVisu::newUART(){
     uart = new ConnectionUART();
+    uart->setEmbSysVisu(this);
     uart->setList(channelList);
+    uart->setHost("localhost");
     uart->setPublisher(pub);
-    uart->showPanels(centralWidget());
     uart->show();
-
-  /* double x[101];
-    double y[101];
-
-    for ( int i = 0; i < 101; i++ ) {
-        x[i] =  i / 10.0;
-        y[i] = sin(x[i]);
-    }
-
-    QwtPlotCurve *curve = new QwtPlotCurve();
-    curve->setRawData(x, y, 101);
-    curve->attach(qwtPlot);
-    qwtPlot->replot();*/
-
 }
 
+
 void EmbSysVisu::slotClose(){
-    pub->disconnect();
+    pub->disconnectFromBroker();
     close();
 }
 
