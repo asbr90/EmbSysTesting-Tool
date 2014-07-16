@@ -10,10 +10,12 @@ using namespace std;
 class Channel: public InterpreterInterface {
 
 public:
-    Channel(int deviceType,datalogger *logger);
-    mosquitto_message convertToMessage(string data);
-    string convertToData(const mosquitto_message*);
+    Channel(int deviceType,datalogger *logger, const char *host);
     void interpretMessage(const mosquitto_message * message);
+    void Caller_Connect(int rc) ;
+    void Caller_Disconnect(int rc) ;
+    void Caller_Message(const char* message);
+    void Caller_Log(const char* log) ;
     const char* stoc(string payload);
 
 private:

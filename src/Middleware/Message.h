@@ -19,8 +19,8 @@ using namespace std;
 
 /*Type of connected device*/
 #define NO_DEVICE_TYPE              0
-#define SUBSCRIBER                  1
-#define PUBLISHER                   2
+#define SUBSCRIBER_CONNECTED        1
+#define PUBLISHER_CONNECTED         2
 
 class Message {
 public:

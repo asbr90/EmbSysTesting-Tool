@@ -17,124 +17,6 @@
    <string>EmbSysVisu</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>1211</width>
-      <height>751</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="logicAnalyzer">
-     <attribute name="title">
-      <string>Logic Analyzer</string>
-     </attribute>
-     <widget class="QWidget" name="verticalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>9</x>
-        <y>9</y>
-        <width>1181</width>
-        <height>691</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QwtPlot" name="qwtPlot">
-           <widget class="QLabel" name="label">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>586</width>
-              <height>687</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Channel:</string>
-            </property>
-           </widget>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="dataAnalyzer">
-     <attribute name="title">
-      <string>Data Analyzer</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="datalogger">
-     <attribute name="title">
-      <string>Logger</string>
-     </attribute>
-     <widget class="QWidget" name="horizontalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>1191</width>
-        <height>631</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QToolBox" name="toolBox">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="currentIndex">
-          <number>1</number>
-         </property>
-         <widget class="QWidget" name="page">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>100</width>
-            <height>30</height>
-           </rect>
-          </property>
-          <attribute name="label">
-           <string>Page 1</string>
-          </attribute>
-         </widget>
-         <widget class="QWidget" name="page_2">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>1189</width>
-            <height>571</height>
-           </rect>
-          </property>
-          <attribute name="label">
-           <string>Page 2</string>
-          </attribute>
-         </widget>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
@@ -216,7 +98,7 @@
    <widget class="QPushButton" name="connectBtn">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>840</x>
       <y>20</y>
       <width>88</width>
       <height>31</height>
@@ -224,6 +106,32 @@
     </property>
     <property name="text">
      <string>Connect</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="disconnectBtn">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>20</y>
+      <width>88</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Disconnect</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ConnectionState">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>20</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connection: no connection</string>
     </property>
    </widget>
   </widget>
@@ -244,9 +152,9 @@
      <property name="title">
       <string>New Connection..</string>
      </property>
-     <addaction name="actionI2C"/>
      <addaction name="actionUART"/>
      <addaction name="actionSPI"/>
+     <addaction name="actionI2C"/>
     </widget>
     <addaction name="actionOpen"/>
     <addaction name="menuNew_Connection"/>
@@ -290,11 +198,6 @@
     <string>Info</string>
    </property>
   </action>
-  <action name="actionI2C">
-   <property name="text">
-    <string>I2C</string>
-   </property>
-  </action>
   <action name="actionUART">
    <property name="text">
     <string>UART</string>
@@ -305,15 +208,12 @@
     <string>SPI</string>
    </property>
   </action>
+  <action name="actionI2C">
+   <property name="text">
+    <string>I2C</string>
+   </property>
+  </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QwtPlot</class>
-   <extends>QFrame</extends>
-   <header>qwt_plot.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

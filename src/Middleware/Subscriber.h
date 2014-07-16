@@ -15,8 +15,8 @@
 class Subscriber : public MQTTv3{
 public:
     Subscriber(const char *id, const char *host, int port, int qos, const char* topic, InterpreterInterface* interpreter);
-    int subscribeTopic(int *mid, const char *sub,int qos);
-    int unsubscribeTopic();
+    void subscribeTopic(int *mid, const char *sub,int qos);
+    void unsubscribeTopic();
     void on_connect(int rc);
     void on_message(const struct mosquitto_message *message);
 

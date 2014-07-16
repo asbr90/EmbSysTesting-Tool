@@ -16,8 +16,7 @@
 #include <list>
 #include "Channel.h"
 using namespace std;
-
-
+class EmbSysVisu;
 
 class ConnectionUART : public QWidget, public Ui::Form
 {
@@ -26,6 +25,8 @@ public:
     explicit ConnectionUART(QWidget *parent = 0);
     void setPublisher(Publisher* pub);
     void setList(list<Channel*> channelList);
+    void setHost(const char* host);
+    void setEmbSysVisu(EmbSysVisu* visu);
 private:
     /**
       * @brief Generate string of registered settings.
@@ -34,7 +35,6 @@ private:
     string generateSettings(Message *msg);
 
 public:
-    // Driver_Uart *uartDriver;
     unsigned int databits;
     bool parityBit;
     bool parityEnable;
@@ -43,11 +43,12 @@ public:
     int mqttDirection;
      string delimiter;
     int columns;
+    const char* host;
     string filename;
     Publisher* pub;
     list<Channel*> channelList;
     QTabWidget* tabwidget;
-    void showPanels(QTabWidget* tabwidget);
+    EmbSysVisu* visu;
 signals:
     
 public slots:
