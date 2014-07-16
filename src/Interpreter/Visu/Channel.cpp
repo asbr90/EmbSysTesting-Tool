@@ -23,6 +23,7 @@ Channel::Channel(int deviceType,datalogger *logger, const char* host){
 }
 
 void Channel::interpretMessage(const mosquitto_message *message){
+    cout << "interpret Channel "<<endl;
     char *s_payload = (char*)message->payload;
     logger->writeData(s_payload);
 }
@@ -45,6 +46,23 @@ void Channel::Caller_Message(const char* message)
 void Channel::Caller_Log(const char* log){
 
 }
+
+void Channel::Caller_Subscribe(const char* topic, int qos)
+{
+
+}
+
+void Channel::Caller_Publish(const char* message, const char* topic)
+{
+
+}
+
+void Channel::Caller_Unsubscribe()
+{
+
+}
+
+
 
 const char* Channel::stoc(string payload){
     return payload.c_str();
