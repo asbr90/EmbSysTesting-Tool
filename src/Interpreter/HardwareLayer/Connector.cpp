@@ -69,10 +69,11 @@ void Connector::interpretMessage(const mosquitto_message* message)
     char* c_messageDeviceType;
 
     if(process == RPI_CONNECTED){
+		if(message->payload != 0){
         char *s_payload = (char*)message->payload;
 
         cout << "RPI interpretMessage "<<endl;
-        i_messagetype = getmessageTypeAsInt(s_payload,1);
+        i_messagetype = getmessageTypeAsInt(s_payload,1);   
         i_messageID = getmessageTypeAsInt(s_payload,2);
 
         if(i_messagetype == CONNECTION_DEVICE_MESSAGE){
@@ -107,6 +108,7 @@ void Connector::interpretMessage(const mosquitto_message* message)
 
               if(i_messageConnectedType == SUBSCRIBER){
                   if(i_messageDeviceType == UART_DEVICE){
+						cout << "Add new Subscriber at list"<<endl;
                       mqttList.push_back((MQTTv3*)new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
                   }
                   if(i_messageDeviceType == SPI_DEVICE)
@@ -117,6 +119,7 @@ void Connector::interpretMessage(const mosquitto_message* message)
             }
         }
     }
+}
 }
 
 
