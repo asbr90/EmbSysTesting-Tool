@@ -133,29 +133,69 @@ void Connector::interpretMessage(const mosquitto_message* message)
               i_messageDeviceType = getmessageTypeAsInt(s_payload,3);
               i_messageSetting = getmessageTypeAsInt(s_payload,4);
               i_messageConnectedType = getmessageTypeAsInt(s_payload,5);
-
-              if(i_messageConnectedType == SUBSCRIBER_CONNECTED){
-                  if(i_messageDeviceType == UART_DEVICE){
-					  stringstream convert;
-					  convert << i_messageDeviceType;
-					  c_messageDeviceType = convert.str().c_str();
-                     
-                      if(i_messageConnectedType == SUBSCRIBER_CONNECTED)
-						mqttList.push_back((MQTTv3*)new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
-                  
-					  if(i_messageConnectedType == PUBLISHER_CONNECTED)
-						mqttList.push_back((MQTTv3*)new Publisher(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
+			  
+			   stringstream convert;
+			   convert << i_messageDeviceType;
+			  c_messageDeviceType = convert.str().c_str();
+			  ProcessMQTTSettings(s_payload);
+			  
+			  if(i_messageDeviceType == UART_DEVICE){
+				  cout << "ConnectedAs "<< ConnectedAs <<endl; 
+                   if(ConnectedAs == SUBSCRIBER_CONNECTED){
+					   
+				  cout << "New Uart device should be connected as Subscriber"<<endl;
+						mqttList.push_back((MQTTv3*)new Subscriber(this->ChannelID,this->host, 1883, 1, this->topic, new Driver_Uart()));      //push element to end of list			
+					}else  if(i_messageConnectedType == PUBLISHER_CONNECTED){
+				  cout << "new Uart device should be connected as Publisher"<<endl;
+				       mqttList.push_back((MQTTv3*)new Publisher(this->ChannelID,this->host, 1883, 1, this->topic, new Driver_Uart()));      //push element to end of list
+		      }
+}
+			 if(i_messageDeviceType == SPI_DEVICE){	
+				if(i_messageConnectedType == SUBSCRIBER_CONNECTED)
+                       mqttList.push_back ((MQTTv3*) new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/SPI", new Driver_Uart()));   //TODO: new SPI instance
+				else if(i_messageConnectedType == PUBLISHER_CONNECTED)
+						mqttList.push_back ((MQTTv3*) new Publisher(c_messageDeviceType,"localhost", 1883, 1, "RPI/SPI", new Driver_Uart()));   //TODO: new SPI instance		
+             }
              
-                  }
-                  if(i_messageDeviceType == SPI_DEVICE)
-                     mqttList.push_back ((MQTTv3*) new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/SPI", new Driver_Uart()));   //TODO: new SPI instance
-                  if(i_messageDeviceType == I2C_DEVICE)
+              if(i_messageDeviceType == I2C_DEVICE){
+				  if(i_messageConnectedType == SUBSCRIBER_CONNECTED)
                      mqttList.push_back((MQTTv3*)new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/I2C", new Driver_Uart()));  // TODO: new I2C instance
+				  else if(i_messageConnectedType == PUBLISHER_CONNECTED)
+					  mqttList.push_back((MQTTv3*)new Publisher(c_messageDeviceType,"localhost", 1883, 1, "RPI/I2C", new Driver_Uart()));  // TODO: new I2C instance
+				
               }
-            }
+            
         }
     }
+  }
+}
 
+
+void Connector::ProcessMQTTSettings(string s_payload)
+{
+	string dummy_payload = s_payload;
+	vector<string> vec;
+	vector<string> mqttVec;
+	istringstream buf(dummy_payload);
+	string mqttsettings;
+	string token,d_token;
+	
+	for(token; getline(buf,token, '{');){
+		vec.push_back(token);
+	}
+		
+	mqttsettings = vec[2];	
+	istringstream mqttBuf(mqttsettings);
+	
+	for(token; getline(mqttBuf,token, ';');){
+		mqttVec.push_back(token);
+	}
+
+	this->ChannelID = mqttVec[0].c_str();
+	this->ConnectedAs= atoi(mqttVec[1].c_str());
+	this->host 	= mqttVec[2].c_str();
+	this->qos  	= mqttVec[3].c_str();
+	this->topic = mqttVec[4].c_str();		
 }
 
 

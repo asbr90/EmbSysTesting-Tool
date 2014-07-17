@@ -29,8 +29,15 @@ public:
    void interpretMessage(const mosquitto_message* message);
    void Connector_loop();
    int getmessageTypeAsInt(string s_payload, int number);
-
+   void	ProcessMQTTSettings(string s_payload);
    bool connectFlag;
    int  process;
    list<MQTTv3*> mqttList;
+   
+private: /*need connection setting in order to obsorve*/   
+	const char* topic;
+	const char* qos;
+	const char* host;
+	const char* ChannelID;
+	int ConnectedAs;
 };
