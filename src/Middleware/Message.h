@@ -18,9 +18,9 @@ using namespace std;
 #define I2C_DEVICE                  2
 
 /*Type of connected device*/
-#define NO_DEVICE_TYPE              0
-#define SUBSCRIBER_CONNECTED        1
-#define PUBLISHER_CONNECTED         2
+#define NO_DEVICE_TYPE              -1
+#define SUBSCRIBER_CONNECTED        0
+#define PUBLISHER_CONNECTED         1
 
 class Message {
 public:
@@ -30,7 +30,7 @@ public:
       */
     Message(int deviceID, int messageType, int deviceType=-1, int typeOfConnectedDevice = 0);
     string connect_message();
-    string config_message(string settings, int typeOfConnectedDevice);
+    string config_message(string settings, int typeOfConnectedDevice, const char *id, const char *host, const char *topic, const char *qos);
     string disconnect_message();
     string data_message(string);
     string error_message(string);

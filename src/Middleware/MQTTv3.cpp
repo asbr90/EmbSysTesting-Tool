@@ -18,12 +18,14 @@ void MQTTv3::on_message(const struct mosquitto_message *message){
     printf("\t%s %s\n",message->topic, message->payload);
 }
 
+
 void MQTTv3::on_log(int level, const char *str){
     cout << str << endl;
     Interpreter->Caller_Log(str);
 }
 
 void MQTTv3::async_Connect(){
+    cout << "Connect "<<topic << endl;
     error_code = connect_async(host, port, keepalive);
     loop_start();
 }

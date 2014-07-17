@@ -50,7 +50,7 @@ void EmbSysVisu::Caller_Disconnect(int rc)
 
 void EmbSysVisu::Caller_Message(const char* message)
 {
-
+    cout << "Caller_Message EmbSysVisu: " << message <<endl;
 }
 
 void EmbSysVisu::Caller_Log(const char* log){
@@ -76,11 +76,24 @@ void EmbSysVisu::Caller_Unsubscribe()
 void EmbSysVisu::interpretMessage(const mosquitto_message* message)
 {
 
+    cout << "interpret Message EmbSysVisu: "<< (char*)message->payload  <<endl;
 }
 
 void EmbSysVisu::disconnectHandler()
 {
+    Channel *channel;
+    list<Channel>::iterator i;
     pub->disconnectFromBroker();
+
+    //close all connection in order to disconnect properly
+    cout << "size: "<< channelList.size();
+    for(std::list<Channel*>::iterator list_iter = channelList.begin();
+        list_iter != channelList.end(); list_iter++)
+    {
+        channel = *list_iter;
+        channel->Disconnect();
+    }
+
 }
 
 void EmbSysVisu::connectionHandler()
@@ -99,8 +112,7 @@ void EmbSysVisu::connectionHandler()
 void EmbSysVisu::newUART(){
     uart = new ConnectionUART();
     uart->setEmbSysVisu(this);
-    uart->setList(channelList);
-    uart->setHost("localhost");
+    uart->setList(&channelList);
     uart->setPublisher(pub);
     uart->show();
 }

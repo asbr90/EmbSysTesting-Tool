@@ -5,6 +5,7 @@ using namespace std;
 
 Subscriber::Subscriber(const char *id, const char *host, int port, int qos, const char *topic, InterpreterInterface* interpreter):MQTTv3(id,host,port,qos,topic,interpreter)
 {
+    cout << "topic: "<< topic<<endl;
 }
 
 void Subscriber::subscribeTopic(int *mid, const char *sub, int qos)
@@ -25,7 +26,7 @@ void Subscriber::unsubscribeTopic()
 void Subscriber::on_connect(int rc)
 {
     cout << "MID: "<< this->mid <<endl;
-    cout << "TOPIC: "<< this->topic << endl;
+    cout << "TOPIC: "<< topic << endl;
     cout << "QoS: " << this->qos <<endl;
     Interpreter->Caller_Connect(rc);
     subscribe(NULL, topic, qos);

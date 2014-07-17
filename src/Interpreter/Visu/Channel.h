@@ -10,7 +10,7 @@ using namespace std;
 class Channel: public InterpreterInterface {
 
 public:
-    Channel(int deviceType,datalogger *logger, const char *host);
+    Channel(int deviceType,datalogger *logger, string host, const char *topic);
     void Caller_Connect(int rc);
     void Caller_Disconnect(int rc) ;
     void Caller_Message(const char* message);
@@ -20,6 +20,8 @@ public:
     void Caller_Unsubscribe();
     void interpretMessage(const mosquitto_message* message);
     const char* stoc(string payload);
+    void Disconnect(void);
+    string getID(void);
 
 private:
     datalogger* logger;

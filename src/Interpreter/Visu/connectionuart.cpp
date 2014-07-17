@@ -20,6 +20,8 @@ ConnectionUART::ConnectionUART(QWidget *parent) :  QWidget(parent)
     connect(delimiterText, SIGNAL(editingFinished()), this, SLOT(storeFileSettings()));
     connect(storagefilenameText, SIGNAL(editingFinished()), this, SLOT(storeFileSettings()));
     connect(columnsText, SIGNAL(editingFinished()), this, SLOT(storeFileSettings()));
+    connect(ActiveAsCombobox, SIGNAL(currentIndexChanged(int)), this, SLOT(storeMQTT()));
+
 
     this->storeDataBits();
     this->storeBaudrate();
@@ -42,14 +44,10 @@ void ConnectionUART::storeFileSettings()
     this->columns = columnsText->text().toInt();
 }
 
-void ConnectionUART::setList(list<Channel*> channelList){
+void ConnectionUART::setList(list<Channel*> *channelList){
     this->channelList = channelList;
 }
 
-void ConnectionUART::setHost(const char* host)
-{
-    this->host = host;
-}
 
 void ConnectionUART::setPublisher(Publisher *pub)
 {
@@ -59,11 +57,12 @@ void ConnectionUART::setPublisher(Publisher *pub)
 void ConnectionUART::storeMQTT()
 {
     this->mqttDirection = ActiveAsCombobox->currentIndex();
+    this->topic = "EMBSYS/UART/Channel1";//topicEditLine->text().toStdString();
 }
 
 void ConnectionUART::storeSettings()
 {
-    cout << "\nstoreSetting" << endl;
+ /*   cout << "\nstoreSetting" << endl;
     //store the combobox values
 
     cout << "Data bits :    "       << databits         << endl;
@@ -72,21 +71,24 @@ void ConnectionUART::storeSettings()
     cout << "Baudrate   :   "       << baudrate         << endl;
     cout << "Direction  :   "       << dataDirection    << endl;
     cout << "Active as  :   "       << mqttDirection    << endl;
-
+*/
     //create instance of interface for communicate beteween hardware and software
     Message *msg = new Message(1,CONNECTION_DEVICE_MESSAGE,UART_DEVICE);
     string s_msg = msg->connect_message();
     const char* c_msg = msg->stoc(s_msg);
-    pub->publishMessage(c_msg);
+    pub->publishMessage(c_msg);     //Connect message
 
     msg = new Message(1,CONFIG_DEVICE_MESSAGE,UART_DEVICE,mqttDirection);
     string s_settings = generateSettings(msg);
-    cout << s_settings << endl;
 
     datalogger *logger = new datalogger(msg->stoc(delimiter), UART_DEVICE, msg->stoc(filename), columns);
-    pub->publishMessage(msg->stoc(msg->config_message(s_settings,mqttDirection)));
+    Channel *channel =   new Channel(UART_DEVICE,logger,visu->host->text().toStdString(),this->topic);
+    channelList->push_back(channel);
 
-    channelList.push_back(new Channel(UART_DEVICE,logger,host));
+    cout << "dir: " << mqttDirection <<endl;
+    pub->publishMessage(msg->stoc(msg->config_message(s_settings,mqttDirection,channel->getID().c_str(),visu->host->text().toStdString().c_str(),
+                                                      this->topic, visu->qos->text().toStdString().c_str())));      //Configuration message
+
     //TODO: push logic and data analyzer to list
 
    // visu->tabWidget->show();
@@ -136,7 +138,7 @@ string ConnectionUART::generateSettings(Message *msg)
     string baudrate = NumberToString(this->baudrate);
     string dataDirection = NumberToString(this->dataDirection);
 
-    return ("{"+dbits+msg->delimiter+parityBit+msg->delimiter+parityEnable+msg->delimiter+baudrate+msg->delimiter+dataDirection+"}");
+    return ("{"+dbits+msg->delimiter+parityBit+msg->delimiter+parityEnable+msg->delimiter+baudrate+msg->delimiter+dataDirection + msg->delimiter+"}");
 }
 
 

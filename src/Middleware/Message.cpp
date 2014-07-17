@@ -28,11 +28,12 @@ string Message::connect_message()
 }
 
 
-string  Message::config_message(string settings, int typeOfConnectedDevice)
+string  Message::config_message(string settings, int typeOfConnectedDevice, const char *Channelid, const char* host, const char* topic, const char* qos)
 {
     this->settings = settings;
     this->typeOfConnectedDevice = typeOfConnectedDevice;
     stringstream strs_id, strs_typeofConnectedDevice, strs_messageType, strs_settings,strs_type;
+    stringstream strs_host, strs_qos, strs_topic,strs_Channelid;
 
     strs_id << this->deviceID;
     string s_deviceID = strs_id.str();
@@ -49,7 +50,18 @@ string  Message::config_message(string settings, int typeOfConnectedDevice)
     strs_settings << this->settings;
     string s_settings = strs_settings.str();
 
-    return (s_messageType + delimiter + s_deviceID  + delimiter + s_deviceType + delimiter + s_settings + delimiter +s_typeofConnectedDevice + delimiter);
+    strs_host <<host;
+    strs_qos << qos;
+    strs_topic << topic;
+    strs_Channelid << Channelid;
+
+    string s_host = strs_host.str();
+    string s_qos = strs_qos.str();
+    string s_topic = strs_topic.str();
+    string s_Channelid = strs_Channelid.str();
+
+    return (s_messageType + delimiter + s_deviceID  + delimiter + s_deviceType +
+            delimiter + s_settings + "{"+s_Channelid + delimiter + s_typeofConnectedDevice + delimiter + s_host  + delimiter+s_qos +delimiter+ s_topic+ delimiter+"}");
 }
 
 string  Message::disconnect_message()

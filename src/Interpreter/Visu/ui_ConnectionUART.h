@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ConnectionUART.ui'
 **
-** Created: Wed Jul 16 18:23:08 2014
+** Created: Thu Jul 17 16:07:48 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -51,6 +51,8 @@ public:
     QLineEdit *columnsText;
     QLineEdit *delimiterText;
     QLabel *label_8;
+    QLabel *label_11;
+    QLineEdit *topicEditLine;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *CancelBtn;
@@ -89,7 +91,7 @@ public:
         parityComboBox = new QComboBox(gridLayoutWidget);
         parityComboBox->setObjectName(QString::fromUtf8("parityComboBox"));
 
-        gridLayout->addWidget(parityComboBox, 3, 1, 1, 1);
+        gridLayout->addWidget(parityComboBox, 3, 2, 1, 1);
 
         label_4 = new QLabel(gridLayoutWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -104,7 +106,7 @@ public:
         baudCombobox = new QComboBox(gridLayoutWidget);
         baudCombobox->setObjectName(QString::fromUtf8("baudCombobox"));
 
-        gridLayout->addWidget(baudCombobox, 1, 1, 1, 1);
+        gridLayout->addWidget(baudCombobox, 1, 2, 1, 1);
 
         label_5 = new QLabel(gridLayoutWidget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
@@ -114,7 +116,7 @@ public:
         StopbitsCombobox = new QComboBox(gridLayoutWidget);
         StopbitsCombobox->setObjectName(QString::fromUtf8("StopbitsCombobox"));
 
-        gridLayout->addWidget(StopbitsCombobox, 4, 1, 1, 1);
+        gridLayout->addWidget(StopbitsCombobox, 4, 2, 1, 1);
 
         label_2 = new QLabel(gridLayoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -124,7 +126,7 @@ public:
         directionComboBox = new QComboBox(gridLayoutWidget);
         directionComboBox->setObjectName(QString::fromUtf8("directionComboBox"));
 
-        gridLayout->addWidget(directionComboBox, 0, 1, 1, 1);
+        gridLayout->addWidget(directionComboBox, 0, 2, 1, 1);
 
         label_6 = new QLabel(gridLayoutWidget);
         label_6->setObjectName(QString::fromUtf8("label_6"));
@@ -134,7 +136,7 @@ public:
         databitsCombobox = new QComboBox(gridLayoutWidget);
         databitsCombobox->setObjectName(QString::fromUtf8("databitsCombobox"));
 
-        gridLayout->addWidget(databitsCombobox, 2, 1, 1, 1);
+        gridLayout->addWidget(databitsCombobox, 2, 2, 1, 1);
 
         label_7 = new QLabel(gridLayoutWidget);
         label_7->setObjectName(QString::fromUtf8("label_7"));
@@ -144,37 +146,47 @@ public:
         ActiveAsCombobox = new QComboBox(gridLayoutWidget);
         ActiveAsCombobox->setObjectName(QString::fromUtf8("ActiveAsCombobox"));
 
-        gridLayout->addWidget(ActiveAsCombobox, 5, 1, 1, 1);
+        gridLayout->addWidget(ActiveAsCombobox, 5, 2, 1, 1);
 
         label_10 = new QLabel(gridLayoutWidget);
         label_10->setObjectName(QString::fromUtf8("label_10"));
 
-        gridLayout->addWidget(label_10, 8, 0, 1, 1);
+        gridLayout->addWidget(label_10, 9, 0, 1, 1);
 
         label_9 = new QLabel(gridLayoutWidget);
         label_9->setObjectName(QString::fromUtf8("label_9"));
 
-        gridLayout->addWidget(label_9, 7, 0, 1, 1);
+        gridLayout->addWidget(label_9, 8, 0, 1, 1);
 
         storagefilenameText = new QLineEdit(gridLayoutWidget);
         storagefilenameText->setObjectName(QString::fromUtf8("storagefilenameText"));
 
-        gridLayout->addWidget(storagefilenameText, 7, 1, 1, 1);
+        gridLayout->addWidget(storagefilenameText, 8, 2, 1, 1);
 
         columnsText = new QLineEdit(gridLayoutWidget);
         columnsText->setObjectName(QString::fromUtf8("columnsText"));
 
-        gridLayout->addWidget(columnsText, 8, 1, 1, 1);
+        gridLayout->addWidget(columnsText, 9, 2, 1, 1);
 
         delimiterText = new QLineEdit(gridLayoutWidget);
         delimiterText->setObjectName(QString::fromUtf8("delimiterText"));
 
-        gridLayout->addWidget(delimiterText, 6, 1, 1, 1);
+        gridLayout->addWidget(delimiterText, 7, 2, 1, 1);
 
         label_8 = new QLabel(gridLayoutWidget);
         label_8->setObjectName(QString::fromUtf8("label_8"));
 
-        gridLayout->addWidget(label_8, 6, 0, 1, 1);
+        gridLayout->addWidget(label_8, 7, 0, 1, 1);
+
+        label_11 = new QLabel(gridLayoutWidget);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        gridLayout->addWidget(label_11, 6, 0, 1, 1);
+
+        topicEditLine = new QLineEdit(gridLayoutWidget);
+        topicEditLine->setObjectName(QString::fromUtf8("topicEditLine"));
+
+        gridLayout->addWidget(topicEditLine, 6, 2, 1, 1);
 
         horizontalLayoutWidget = new QWidget(Form);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
@@ -192,11 +204,6 @@ public:
 
         horizontalLayout->addWidget(ConnectBtn);
 
-        line->raise();
-        label->raise();
-        gridLayoutWidget->raise();
-        horizontalLayoutWidget->raise();
-        label_10->raise();
 
         retranslateUi(Form);
 
@@ -259,12 +266,13 @@ public:
         label_7->setText(QApplication::translate("Form", "Active as:", 0, QApplication::UnicodeUTF8));
         ActiveAsCombobox->clear();
         ActiveAsCombobox->insertItems(0, QStringList()
-         << QApplication::translate("Form", "Publisher", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("Form", "Subscriber", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("Form", "Publisher", 0, QApplication::UnicodeUTF8)
         );
         label_10->setText(QApplication::translate("Form", "Columns number:", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("Form", "Filename:", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("Form", "Delimiter:", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("Form", "Topic", 0, QApplication::UnicodeUTF8));
         CancelBtn->setText(QApplication::translate("Form", "Cancel", 0, QApplication::UnicodeUTF8));
         ConnectBtn->setText(QApplication::translate("Form", "Connect", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

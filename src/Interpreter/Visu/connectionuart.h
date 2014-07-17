@@ -24,8 +24,7 @@ class ConnectionUART : public QWidget, public Ui::Form
 public:
     explicit ConnectionUART(QWidget *parent = 0);
     void setPublisher(Publisher* pub);
-    void setList(list<Channel*> channelList);
-    void setHost(const char* host);
+    void setList(list<Channel*> *channelList);
     void setEmbSysVisu(EmbSysVisu* visu);
 private:
     /**
@@ -44,9 +43,10 @@ public:
      string delimiter;
     int columns;
     const char* host;
+    const char* topic;
     string filename;
     Publisher* pub;
-    list<Channel*> channelList;
+    list<Channel*> *channelList;
     QTabWidget* tabwidget;
     EmbSysVisu* visu;
 signals:

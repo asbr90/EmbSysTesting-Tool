@@ -28,3 +28,9 @@ void Publisher::publishMessage(const char *message)
    publish(NULL,this->topic,strlen(message), message,1,false);
 }
 
+void Publisher::on_message(const struct mosquitto_message *message)
+{
+    cout << "received message"<<endl;
+    Interpreter->Caller_Message((const char*) message->payload);
+}
+
