@@ -3,6 +3,11 @@
 #include "GPIO_Driver.h"
 #include "Connector.h"
 #include "../../Middleware/Message.h"
+#include <sstream>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <iterator>
 using namespace std;
 
 Connector::Connector(){
@@ -15,6 +20,7 @@ void Connector::Connector_loop()
     rpi_subscriber->async_Connect();
     connectFlag = true;
     this->process = RPI_CONNECTED;
+    
     do{
 
     }while(connectFlag);//while disconnect message received
@@ -61,26 +67,43 @@ void Connector::Caller_Disconnect(int rc)
 
 void Connector::Caller_Message(const char* message)
 {
-	//cout <<  "Received message: " <<message<<endl;
+	cout <<  "Received message: " <<message<<endl;
 }
 void Connector::Caller_Log(const char* log)
 {
 	
 }
 
-void Connector::interpretMessage(const char* message)
+
+void Connector::Caller_Subscribe(const char* topic, int qos)
+{
+
+}
+
+void Connector::Caller_Publish(const char* message, const char* topic)
+{
+	
+}
+
+void Connector::Caller_Unsubscribe()
+{
+
+}
+
+void Connector::interpretMessage(const mosquitto_message* message)
 {
     int i_messagetype,i_messageID,i_messageConnectedType,i_messageSetting,i_messageDeviceType;
-    char* c_messageDeviceType;
-	 cout << "RPI interpretMessage "<<endl;
-    if(process == RPI_CONNECTED){
-		if(message->payload != 0){
-        char *s_payload = (char*)message->payload;
+    const char* c_messageDeviceType;
+	const char *c_payload = (const char*)message->payload;
+    string s_payload(c_payload);
+	
+    if(process >= RPI_CONNECTED){
 
         cout << "RPI interpretMessage "<<endl;
         i_messagetype = getmessageTypeAsInt(s_payload,1);   
         i_messageID = getmessageTypeAsInt(s_payload,2);
-
+         
+		
         if(i_messagetype == CONNECTION_DEVICE_MESSAGE){
             cout << "Connection device message "<<endl;
             process = RPI_GET_CONNECT_MESSAGE;
@@ -106,15 +129,23 @@ void Connector::interpretMessage(const char* message)
 
         if(i_messagetype == CONFIG_DEVICE_MESSAGE){
             if(process >= RPI_GET_CONNECT_MESSAGE){
-              c_messageDeviceType  = getmessageTypeAsString(s_payload,3);
+             // c_messageDeviceType  = getmessageTypeAsInt(s_payload,3);
               i_messageDeviceType = getmessageTypeAsInt(s_payload,3);
               i_messageSetting = getmessageTypeAsInt(s_payload,4);
               i_messageConnectedType = getmessageTypeAsInt(s_payload,5);
 
               if(i_messageConnectedType == SUBSCRIBER_CONNECTED){
                   if(i_messageDeviceType == UART_DEVICE){
-						cout << "Add new Subscriber at list"<<endl;
-                      mqttList.push_back((MQTTv3*)new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
+					  stringstream convert;
+					  convert << i_messageDeviceType;
+					  c_messageDeviceType = convert.str().c_str();
+                     
+                      if(i_messageConnectedType == SUBSCRIBER_CONNECTED)
+						mqttList.push_back((MQTTv3*)new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
+                  
+					  if(i_messageConnectedType == PUBLISHER_CONNECTED)
+						mqttList.push_back((MQTTv3*)new Publisher(c_messageDeviceType,"localhost", 1883, 1, "RPI/UART", new Driver_Uart()));      //push element to end of list
+             
                   }
                   if(i_messageDeviceType == SPI_DEVICE)
                      mqttList.push_back ((MQTTv3*) new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/SPI", new Driver_Uart()));   //TODO: new SPI instance
@@ -124,36 +155,28 @@ void Connector::interpretMessage(const char* message)
             }
         }
     }
-}
+
 }
 
 
-int Connector::getmessageTypeAsInt(char* s_payload, int number)
+int Connector::getmessageTypeAsInt(string s_payload, int number)
 {
-    int i_payload;
-     char *c_payload;
-    int i;
-
-    for(i=0;i < number; i++){
-        c_payload = strtok(s_payload,";");
-    }
-
-    return i_payload = atoi(c_payload);
-
+	string dummy_payload = s_payload;
+	vector<string> vec;
+	istringstream buf(dummy_payload);
+	int i;
+	string token;
+	int i_type;
+	
+	for(token; getline(buf,token, ';');)
+		vec.push_back(token);
+		
+	for(i=0;i<number;i++)
+		i_type = atoi(vec[i].c_str());
+	
+	return i_type;	
+	 
 }
 
 
-
-char* Connector::getmessageTypeAsString( char* s_payload, int number)
-{
-    char *c_payload;
-    int i;
-
-    for(i=0;i < number; i++){
-        c_payload = strtok(s_payload,";");
-    }
-
-    return c_payload;
-
-}
 

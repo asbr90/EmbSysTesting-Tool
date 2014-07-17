@@ -47,6 +47,28 @@ void Driver_Uart::Caller_Log(const char* log)
 	
 }
 
+
+void Driver_Uart::Caller_Subscribe(const char* topic, int qos)
+{
+
+}
+
+void Driver_Uart::Caller_Publish(const char* message, const char* topic)
+{
+
+}
+
+void Driver_Uart::Caller_Unsubscribe()
+{
+
+}
+
+void Driver_Uart::interpretMessage(const mosquitto_message* message)
+{
+	cout << "Driver interpreter" <<endl;
+}
+	
+
 bool Driver_Uart::DUI_Initialization(){
 	cout << "Initialize UART Port" << endl;
 

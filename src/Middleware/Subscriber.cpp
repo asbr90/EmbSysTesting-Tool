@@ -34,6 +34,7 @@ void Subscriber::on_connect(int rc)
 
 void Subscriber::on_message(const struct mosquitto_message *message)
 {
+	cout << "on_message" <<endl;
     const char *s_payload = (char*)message->payload;
     Interpreter->interpretMessage(message);
     Interpreter->Caller_Message(s_payload);

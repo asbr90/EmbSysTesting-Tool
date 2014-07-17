@@ -23,10 +23,12 @@ public:
    void Caller_Disconnect(int rc);
    void Caller_Message(const char* message);
    void Caller_Log(const char* log) ;
-   void interpretMessage(const char *);
+   void Caller_Subscribe(const char* topic, int qos) ;
+   void Caller_Publish(const char* message, const char* topic) ;
+   void Caller_Unsubscribe();
+   void interpretMessage(const mosquitto_message* message);
    void Connector_loop();
-   char* getmessageTypeAsString(char* s_payload, int number);
-   int getmessageTypeAsInt(char* s_payload, int number);
+   int getmessageTypeAsInt(string s_payload, int number);
 
    bool connectFlag;
    int  process;
