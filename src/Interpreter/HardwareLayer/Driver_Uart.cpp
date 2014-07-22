@@ -11,10 +11,25 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <wiringPi.h>
 
 using namespace std;
 
+void TX(void) { cout << "TX data" <<endl; }
+void RX (void) { cout << "RX data" <<endl; }
+
+
+int Driver_Uart::foo1(int a, int b)
+{
+	cout << a << "* " <<b << endl;
+}
 Driver_Uart::Driver_Uart(){
+	
+	wiringPiISR (14, INT_EDGE_BOTH, &TX);
+	
+	wiringPiISR (15, INT_EDGE_BOTH, &RX);
+
+
 }
 
 Driver_Uart::Driver_Uart(unsigned int cSize, bool parityEnable, bool parityOdd, unsigned long baudrate){
@@ -22,6 +37,14 @@ Driver_Uart::Driver_Uart(unsigned int cSize, bool parityEnable, bool parityOdd, 
 
 }
 
+
+void Driver_Uart::usefoo(){
+	//(this->*_currentPtr)();
+}
+void Driver_Uart::seInterruptFunction(){
+	/*_currentPtr = &Driver_Uart::RX;
+	wiringPiISR (15, INT_EDGE_FALLING, (_currentPtr));*/
+}
 void Driver_Uart::transmitData(const char* data) {
 
 }
@@ -55,7 +78,7 @@ void Driver_Uart::Caller_Subscribe(const char* topic, int qos)
 
 void Driver_Uart::Caller_Publish(const char* message, const char* topic)
 {
-
+	
 }
 
 void Driver_Uart::Caller_Unsubscribe()
@@ -72,7 +95,7 @@ void Driver_Uart::interpretMessage(const mosquitto_message* message)
 bool Driver_Uart::DUI_Initialization(){
 	cout << "Initialize UART Port" << endl;
 
-if ((fd = serialOpen ("/dev/ttyAMA0", UARTSettings.baudrate)) < 0)
+if ((fd = serialOpen ("/dev/ttyAMA0", 9600)) < 0)
   {
     fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
     return false;

@@ -7,6 +7,8 @@
 #include "../../Middleware/MQTTv3.h"
 #include <iostream>
 #include <list>
+#include "Driver_Uart.h"
+
 using namespace std;
 #define RPI_CONNECTED               1
 #define RPI_GET_CONNECT_MESSAGE     2
@@ -40,4 +42,6 @@ private: /*need connection setting in order to obsorve*/
 	const char* host;
 	const char* ChannelID;
 	int ConnectedAs;
+	
+	Driver_Uart *uart;
 };

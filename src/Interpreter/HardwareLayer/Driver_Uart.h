@@ -86,6 +86,7 @@ typedef struct {
 
 
 
+
 class Driver_Uart: public DriverUsageInterface, public InterpreterInterface{
 public:
 	Driver_Uart(); 
@@ -102,14 +103,22 @@ public:
     void Caller_Disconnect(int rc);
     void Caller_Message(const char* message);
     void Caller_Log(const char* log) ;
-     void Caller_Subscribe(const char* topic, int qos) ;
+    void Caller_Subscribe(const char* topic, int qos) ;
     void Caller_Publish(const char* message, const char* topic) ;
     void Caller_Unsubscribe();
     void interpretMessage(const mosquitto_message* message);
-  
+	
 	int fd ;					/*File descriptor*/
 	struct termios options;		/*Advanced Serial Port Control*/
 	uart_settings UARTSettings;
+
+	typedef void(Driver_Uart::*ptr)(void);
+	ptr _currentPtr;
+	int foo1(int a, int b);
+	
+	void usefoo();
+	void seInterruptFunction();
+
 };
 #endif /*__DRIVER_UART_*/
 

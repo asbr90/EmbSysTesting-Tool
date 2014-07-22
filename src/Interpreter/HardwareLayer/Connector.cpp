@@ -20,10 +20,21 @@ void Connector::Connector_loop()
     rpi_subscriber->async_Connect();
     connectFlag = true;
     this->process = RPI_CONNECTED;
-    
+	this->uart = new Driver_Uart(DATASIZE7,false,false,BAUD9600);
+
+	if (wiringPiSetup () == -1)
+    {
+     fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
+    }
+   
+    cout << "Driver Test\n";
+    cout << "Setup wiringPI was seccussfull\n";
+    cout << "Try UART connection\n";
+    cout << "---------------------------------" <<endl;
+ 	uart->DUI_Initialization();
     do{
 
-    }while(connectFlag);//while disconnect message received
+    }while(connectFlag );//while disconnect message received
 
 
     /*Driver_Uart *uart = new Driver_Uart(DATASIZE7,false,false,BAUD9600);
@@ -82,7 +93,7 @@ void Connector::Caller_Subscribe(const char* topic, int qos)
 
 void Connector::Caller_Publish(const char* message, const char* topic)
 {
-	
+	 
 }
 
 void Connector::Caller_Unsubscribe()
@@ -99,13 +110,12 @@ void Connector::interpretMessage(const mosquitto_message* message)
 	
     if(process >= RPI_CONNECTED){
 
-        cout << "RPI interpretMessage "<<endl;
+ 
         i_messagetype = getmessageTypeAsInt(s_payload,1);   
         i_messageID = getmessageTypeAsInt(s_payload,2);
          
 		
         if(i_messagetype == CONNECTION_DEVICE_MESSAGE){
-            cout << "Connection device message "<<endl;
             process = RPI_GET_CONNECT_MESSAGE;
         }
 
@@ -140,16 +150,18 @@ void Connector::interpretMessage(const mosquitto_message* message)
 			  ProcessMQTTSettings(s_payload);
 			  
 			  if(i_messageDeviceType == UART_DEVICE){
-				  cout << "ConnectedAs "<< ConnectedAs <<endl; 
-                   if(ConnectedAs == SUBSCRIBER_CONNECTED){
-					   
-				  cout << "New Uart device should be connected as Subscriber"<<endl;
-						mqttList.push_back((MQTTv3*)new Subscriber(this->ChannelID,this->host, 1883, 1, this->topic, new Driver_Uart()));      //push element to end of list			
+			
+				  uart->seInterruptFunction();
+				 
+				  if(ConnectedAs == SUBSCRIBER_CONNECTED){					   
+						mqttList.push_back((MQTTv3*)new Subscriber(this->ChannelID,this->host, 1883, 1, this->topic, uart));      //push element to end of list			
 					}else  if(i_messageConnectedType == PUBLISHER_CONNECTED){
-				  cout << "new Uart device should be connected as Publisher"<<endl;
-				       mqttList.push_back((MQTTv3*)new Publisher(this->ChannelID,this->host, 1883, 1, this->topic, new Driver_Uart()));      //push element to end of list
+				 	 Publisher *uartPub =   new Publisher(this->ChannelID,this->host, 1883, 1, this->topic, uart);      //push element to end of list
+					uartPub->async_Connect();
+					mqttList.push_back((MQTTv3*)uartPub);
 		      }
-}
+
+			}
 			 if(i_messageDeviceType == SPI_DEVICE){	
 				if(i_messageConnectedType == SUBSCRIBER_CONNECTED)
                        mqttList.push_back ((MQTTv3*) new Subscriber(c_messageDeviceType,"localhost", 1883, 1, "RPI/SPI", new Driver_Uart()));   //TODO: new SPI instance
